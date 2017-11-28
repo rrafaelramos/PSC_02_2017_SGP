@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.edu.ifnmg.psc.SGPA.aplicacao;
+package br.edu.ifnmg.tads.psc.sigpa.aplicacao;
 
 /**
  *
@@ -13,7 +13,7 @@ public class SGPA_aplicacao {
 
     /**
      * @param args the command line arguments
-     * @throws br.edu.ifnmg.psc.SGPA.aplicacao.ViolacaoRegraNegocioException
+     * @throws br.edu.ifnmg.tads.psc.sigpa.aplicacao.ViolacaoRegraNegocioException
      */
     public static void main(String[] args) throws ViolacaoRegraNegocioException {
       
