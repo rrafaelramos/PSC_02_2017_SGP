@@ -5,16 +5,20 @@
  */
 package br.edu.ifnmg.tads.psc.sigpa.aplicacao;
 
+import java.util.Date;
+
 /**
  *
  * @author Bruno
  */
 public class Cliente extends Pessoa implements Entidade{
     private long limiteCompra;
-
-    public Cliente() {
+    
+    public Cliente (){
+    
     }
-
+    
+    
     public Cliente(long limiteCompra) {
         this.limiteCompra = limiteCompra;
     }
