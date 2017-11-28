@@ -14,8 +14,7 @@ import java.util.Objects;
 public class ItemVenda implements Entidade{
     private long id;
     private Produto produto;
-    //falta implementar servico;
-    //private Servico servico;
+    private Servico servico;
     private int quantidade;
 
     public ItemVenda() {

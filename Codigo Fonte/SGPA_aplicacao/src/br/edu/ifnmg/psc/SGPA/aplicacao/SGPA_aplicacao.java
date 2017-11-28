@@ -13,6 +13,7 @@ public class SGPA_aplicacao {
 
     /**
      * @param args the command line arguments
+     * @throws br.edu.ifnmg.psc.SGPA.aplicacao.ViolacaoRegraNegocioException
      */
     public static void main(String[] args) throws ViolacaoRegraNegocioException {
       
@@ -28,6 +29,27 @@ public class SGPA_aplicacao {
        p.getEndereco().setRua("troll");
        
        System.out.println(p.toString());
+       
+       ItemVenda i = new ItemVenda();
+       
+       
+       Produto a = new Produto();
+       a.setId(1);
+       a.setPrecoVenda(100);
+       a.setDescricao("produto teste");
+       
+       i.setId(1);
+       i.setProduto(a);
+       i.setQuantidade(2);
+       
+       System.out.println(i.toString());
+       
+       Compra c = new Compra();
+       c.setId(1);
+       c.setValorTotal(1000);
+       
+       System.out.println(c.toString());
+       
     }
     
 }

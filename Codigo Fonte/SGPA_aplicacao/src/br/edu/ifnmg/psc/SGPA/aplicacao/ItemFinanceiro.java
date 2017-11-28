@@ -12,7 +12,7 @@ import java.util.Objects;
  * @author Bruno
  */
 public class ItemFinanceiro implements Entidade{
-    private long id;
+    long id;
     private long precoVenda;
     private String descricao;
 
