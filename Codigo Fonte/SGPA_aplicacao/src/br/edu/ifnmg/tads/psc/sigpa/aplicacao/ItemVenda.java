@@ -14,16 +14,18 @@ import java.util.Objects;
 public class ItemVenda implements Entidade{
     private long id;
     private Produto produto;
-    private Servico servico;
+    //private Servico servico;
     private int quantidade;
+    private Venda venda;
 
     public ItemVenda() {
     }
 
-    public ItemVenda(long id, Produto produto, int quantidade) {
+    public ItemVenda(long id, Produto produto, int quantidade, Venda venda) {
         this.id = id;
         this.produto = produto;
         this.quantidade = quantidade;
+        this.venda = venda;
     }
 
     @Override
