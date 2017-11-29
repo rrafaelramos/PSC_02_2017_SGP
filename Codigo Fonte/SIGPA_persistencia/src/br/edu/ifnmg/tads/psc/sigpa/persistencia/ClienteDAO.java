@@ -7,8 +7,6 @@ package br.edu.ifnmg.tads.psc.sigpa.persistencia;
 
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Cliente;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ClienteRepositorio;
-import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ViolacaoRegraNegocioException;
-import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -76,6 +74,7 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
         }
     }
     
+    @Override
     protected String carregaParametrosBusca(Cliente obj){
         String sql = "";
         
