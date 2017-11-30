@@ -7,6 +7,7 @@ package br.edu.ifnmg.tads.psc.sigpa.persistencia;
 
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Cliente;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ClienteRepositorio;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,17 +22,20 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
 
     @Override
     protected String consultaAbrir() {
-        return "select id, nome, cpf, nascimento from Clientes where id = ?";
+        return "select id, cpf, rg, nome, email, telefone, sexo, "
+                + "nascimento, endereco, limiteCompra from Clientes where id = ?";
     }
 
     @Override
     protected String consultaInsert() {
-        return "insert into Clientes(nome, cpf, nascimento) values(?,?,?)";
+        return "insert into Clientes(cpf, rg, nome, email, telefone, sexo, "
+                + "nascimento, endereco, limiteCompra) values(?,?,?,?,?,?,?,?,?)";
     }
 
     @Override
     protected String consultaUpdate() {
-        return "update Clientes set nome = ?, cpf = ?, nascimento = ? where id = ?";
+        return "update Clientes set cpf = ?, rg = ?, nome = ?, email = ?, telefone = ?, sexo = ?,"
+                + "nascimento = ?, endereco = ?, limiteCompra = ? where id = ?";
     }
 
     @Override
@@ -41,15 +45,25 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
 
     @Override
     protected String consultaBuscar() {
-        return "select id, nome, cpf, nascimento from Clientes "; 
+        return "select * from Clientes "; 
     }
 
     @Override
     protected void carregaParametros(Cliente obj, PreparedStatement consulta) {
         try {
+           
+            consulta.setString(1, obj.getCpf().replace(".", "").replace("-", ""));
+            consulta.setString(2, obj.getRg());
+            consulta.setString(3, obj.getNome());
+            consulta.setString(4, obj.getEmail());
+            consulta.setString(5, obj.getTelefone());
+            //como inserir um char?
+            //consulta.(6, obj.getSexo());
+            consulta.setDate(7, (Date) obj.getNascimento());
+            consulta.setObject(8, obj.getEndereco());
+            consulta.setBigDecimal(9, obj.getLimiteCompra());
             
-            consulta.setString(1, obj.getNome());
-            consulta.setString(2, obj.getCpf().replace(".", "").replace("-", ""));
+//inserir data de nascimento
             consulta.setDate(3, null);
             
             if(obj.getId() > 0)
@@ -60,6 +74,7 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
         }
     }
     
+    @Override
     protected String carregaParametrosBusca(Cliente obj){
         String sql = "";
         
@@ -78,9 +93,16 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
     @Override
     protected Cliente carregaObjeto(ResultSet dados) {
         try {
-            Cliente obj = new Cliente(
-                    );
-            obj.setCpf(cpf);
+            Cliente obj = new Cliente();
+            dados.getLong("id");
+            dados.getString("nome");
+            dados.getString("rg");
+            dados.getString("cpf");
+            dados.getDate("nascimento");
+           // dados.getC("sexo");
+            
+          
+            
             return obj;
             
             

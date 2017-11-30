@@ -5,45 +5,43 @@
  */
 package br.edu.ifnmg.tads.psc.sigpa.aplicacao;
 
-import java.util.Date;
+import java.math.BigDecimal;
+import java.util.Objects;
 
 /**
  *
  * @author Bruno
  */
 public class Cliente extends Pessoa implements Entidade{
-    private long limiteCompra;
+    private BigDecimal limiteCompra;
     
     public Cliente (){
     
     }
     
     
-    public Cliente(long limiteCompra) {
+    public Cliente(BigDecimal limiteCompra) {
         this.limiteCompra = limiteCompra;
     }
 
-    public long getLimiteCompra() {
+    public BigDecimal getLimiteCompra() {
         return limiteCompra;
     }
 
-    public void setLimiteCompra(long limiteCompra) throws ViolacaoRegraNegocioException{
-        if (limiteCompra < 0)
+    /* como comparar big deciaml
+    public void setLimiteCompra(BigDecimal limiteCompra) throws ViolacaoRegraNegocioException{
+        if (limiteCompra <0) {
+        } else {
             throw new ViolacaoRegraNegocioException("O limite não pode ser menor Que '0' (Zero)");
+        }
         this.limiteCompra = limiteCompra;
-    }
+    }*/
 
     @Override
     public String toString() {
         return "Cliente{" + "limiteCompra=" + limiteCompra + '}';
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 71 * hash + (int) (this.limiteCompra ^ (this.limiteCompra >>> 32));
-        return hash;
-    }
 
     @Override
     public boolean equals(Object obj) {
@@ -61,6 +59,13 @@ public class Cliente extends Pessoa implements Entidade{
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 47 * hash + Objects.hashCode(this.limiteCompra);
+        return hash;
     }
     
     

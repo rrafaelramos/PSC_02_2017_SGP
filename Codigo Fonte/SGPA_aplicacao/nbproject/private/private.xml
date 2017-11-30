@@ -2,11 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group>
             <file>file:/home/ananda/repositorioGit/PSC_02_2017_SGP/PSC_02_2017_SGP/Codigo%20Fonte/SGPA_aplicacao/src/br/edu/ifnmg/tads/psc/sigpa/aplicacao/Cliente.java</file>
             <file>file:/home/ananda/repositorioGit/PSC_02_2017_SGP/PSC_02_2017_SGP/Codigo%20Fonte/SGPA_aplicacao/src/br/edu/ifnmg/tads/psc/sigpa/aplicacao/Pessoa.java</file>
             <file>file:/home/ananda/repositorioGit/PSC_02_2017_SGP/PSC_02_2017_SGP/Codigo%20Fonte/SGPA_aplicacao/src/br/edu/ifnmg/tads/psc/sigpa/aplicacao/Repositorio.java</file>
             <file>file:/home/ananda/repositorioGit/PSC_02_2017_SGP/PSC_02_2017_SGP/Codigo%20Fonte/SGPA_aplicacao/src/br/edu/ifnmg/tads/psc/sigpa/aplicacao/ClienteRepositorio.java</file>
         </group>
+=======
+        <group/>
+>>>>>>> 7ea031d22be3f4880bc67caa00c8a9a3dcd57e49
     </open-files>
 </project-private>

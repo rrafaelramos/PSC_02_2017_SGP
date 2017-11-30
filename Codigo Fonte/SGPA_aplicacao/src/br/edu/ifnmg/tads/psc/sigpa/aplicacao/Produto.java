@@ -10,25 +10,25 @@ package br.edu.ifnmg.tads.psc.sigpa.aplicacao;
  * @author Bruno
  */
 public class Produto extends ItemFinanceiro implements Entidade{
-    private int quantidade;
+    private int estoque;
     private long precoCusto;
 
     public Produto() {
     }
 
-    public Produto(int quantidade, long precoCusto) {
-        this.quantidade = quantidade;
+    public Produto(int estoque, long precoCusto) {
+        this.estoque = estoque;
         this.precoCusto = precoCusto;
     }
 
-    public int getQuantidade() {
-        return quantidade;
+    public int getestoque() {
+        return estoque;
     }
 
-    public void setQuantidade(int quantidade) throws ViolacaoRegraNegocioException{
-        if(quantidade <= 0)
-            throw new ViolacaoRegraNegocioException("A quantidade deve ser maior que: '0' (Zero)");
-        this.quantidade = quantidade;
+    public void setestoque(int estoque) throws ViolacaoRegraNegocioException{
+        if(estoque <= 0)
+            throw new ViolacaoRegraNegocioException("A estoque deve ser maior que: '0' (Zero)");
+        this.estoque = estoque;
     }
 
     public long getPrecoCusto() {
@@ -43,7 +43,7 @@ public class Produto extends ItemFinanceiro implements Entidade{
 
     @Override
     public String toString() {
-        return "Produto{" + "quantidade=" + quantidade + ", precoCusto=" + precoCusto + '}';
+        return "Produto{" + "estoque=" + estoque + ", precoCusto=" + precoCusto + '}';
     }
     
     
