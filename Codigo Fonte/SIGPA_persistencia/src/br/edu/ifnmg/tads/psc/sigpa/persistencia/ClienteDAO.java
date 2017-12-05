@@ -7,6 +7,8 @@ package br.edu.ifnmg.tads.psc.sigpa.persistencia;
 
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Cliente;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ClienteRepositorio;
+import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Sexo;
+import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ViolacaoRegraNegocioException;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,50 +24,41 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
 
     @Override
     protected String consultaAbrir() {
-        return "select id, cpf, rg, nome, email, telefone, sexo, "
-                + "nascimento, endereco, limiteCompra from Clientes where id = ?";
+        return "select * from clientes where id = ?";
     }
 
     @Override
     protected String consultaInsert() {
-        return "insert into Clientes(cpf, rg, nome, email, telefone, sexo, "
-                + "nascimento, endereco, limiteCompra) values(?,?,?,?,?,?,?,?,?)";
+        return "insert into clientes (cpf, rg, nascimento, sexo, email, endereco, telefone, limite, nome) values(?,?,?,?,?,?,?,?,?)";
     }
 
     @Override
     protected String consultaUpdate() {
-        return "update Clientes set cpf = ?, rg = ?, nome = ?, email = ?, telefone = ?, sexo = ?,"
-                + "nascimento = ?, endereco = ?, limiteCompra = ? where id = ?";
+        return "update clientes cpf=?, rg=?, nascimento=?, sexo=?, email=?, endereco=?, telefone=?, limite=?, nome=? where id = ?";
     }
 
     @Override
     protected String consultaDelete() {
-        return "delete from Clientes where id = ?";
+        return "delete from clientes where id = ?";
     }
 
     @Override
     protected String consultaBuscar() {
-        return "select * from Clientes "; 
+        return "select * from clientes "; 
     }
 
     @Override
     protected void carregaParametros(Cliente obj, PreparedStatement consulta) {
         try {
-           
             consulta.setString(1, obj.getCpf().replace(".", "").replace("-", ""));
             consulta.setString(2, obj.getRg());
-            consulta.setString(3, obj.getNome());
-            consulta.setString(4, obj.getEmail());
-            consulta.setString(5, obj.getTelefone());
-            //como inserir um char?
-            //consulta.(6, obj.getSexo());
-            consulta.setDate(7, (Date) obj.getNascimento());
-            consulta.setObject(8, obj.getEndereco());
-            consulta.setBigDecimal(9, obj.getLimiteCompra());
-            
-//inserir data de nascimento
-            consulta.setDate(3, null);
-            
+            consulta.setDate(3, (Date) obj.getNascimento());
+            consulta.setString(5, obj.getEmail());
+            consulta.setString(7, obj.getTelefone());
+            consulta.setString(4, obj.getSexo().getValor());
+            consulta.setObject(6, obj.getEndereco());
+            consulta.setBigDecimal(8, obj.getLimite());
+            consulta.setString(9, obj.getNome());
             if(obj.getId() > 0)
                 consulta.setLong(4, obj.getId());
             
@@ -94,19 +87,21 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
     protected Cliente carregaObjeto(ResultSet dados) {
         try {
             Cliente obj = new Cliente();
-            dados.getLong("id");
-            dados.getString("nome");
-            dados.getString("rg");
-            dados.getString("cpf");
-            dados.getDate("nascimento");
-           // dados.getC("sexo");
-            
-          
+            obj.setId(dados.getLong("id"));
+            obj.setNome(dados.getString("nome"));
+            obj.setRg(dados.getString("rg"));
+            obj.setCpf(dados.getString("cpf"));
+            obj.setNascimento(dados.getDate("nascimento"));
+            obj.setSexo(Sexo.parse(dados.getString("sexo")));
+            obj.setEmail(dados.getString("email"));
+            obj.setTelefone(dados.getString("telefone"));
+            obj.setLimite(dados.getBigDecimal("limite"));
             
             return obj;
             
-            
         } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ViolacaoRegraNegocioException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;

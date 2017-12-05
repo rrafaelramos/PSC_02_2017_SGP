@@ -13,33 +13,37 @@ import java.util.Objects;
  * @author Bruno
  */
 public class Cliente extends Pessoa implements Entidade{
-    private BigDecimal limiteCompra;
+    private BigDecimal limite;
     
     public Cliente (){
     
     }
     
     
-    public Cliente(BigDecimal limiteCompra) {
-        this.limiteCompra = limiteCompra;
+    public Cliente(BigDecimal limite) {
+        this.limite = limite;
     }
-
-    public BigDecimal getLimiteCompra() {
-        return limiteCompra;
+    
+    public void setLimite(BigDecimal limite){
+        this.limite = limite;
+    }
+        
+    public BigDecimal getLimite() {
+        return limite;
     }
 
     /* como comparar big deciaml
-    public void setLimiteCompra(BigDecimal limiteCompra) throws ViolacaoRegraNegocioException{
-        if (limiteCompra <0) {
+    public void setLimite(BigDecimal limite) throws ViolacaoRegraNegocioException{
+        if (limite <0) {
         } else {
             throw new ViolacaoRegraNegocioException("O limite não pode ser menor Que '0' (Zero)");
         }
-        this.limiteCompra = limiteCompra;
+        this.limite = limite;
     }*/
 
     @Override
     public String toString() {
-        return "Cliente{" + "limiteCompra=" + limiteCompra + '}';
+        return "Cliente{" + "limite=" + limite + '}';
     }
 
 
@@ -55,7 +59,7 @@ public class Cliente extends Pessoa implements Entidade{
             return false;
         }
         final Cliente other = (Cliente) obj;
-        if (this.limiteCompra != other.limiteCompra) {
+        if (this.limite != other.limite) {
             return false;
         }
         return true;
@@ -64,8 +68,12 @@ public class Cliente extends Pessoa implements Entidade{
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 47 * hash + Objects.hashCode(this.limiteCompra);
+        hash = 47 * hash + Objects.hashCode(this.limite);
         return hash;
+    }
+
+    public void setLimite() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

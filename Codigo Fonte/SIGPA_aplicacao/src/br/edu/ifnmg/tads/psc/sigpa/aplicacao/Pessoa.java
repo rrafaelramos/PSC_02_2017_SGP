@@ -15,11 +15,11 @@ import java.util.Objects;
 public class Pessoa implements Entidade{
     private long id;
     private String cpf, rg, nome, email, telefone;
-    private char sexo;
+    private Sexo sexo;
     private Date nascimento;
     private Endereco endereco;
 
-    public Pessoa(long id, String cpf, String rg, String nome, String email, String telefone, char sexo, Date nascimento, Endereco endereco) {
+    public Pessoa(long id, String cpf, String rg, String nome, String email, String telefone, Sexo sexo, Date nascimento, Endereco endereco) {
         this.id = id;
         this.cpf = cpf;
         this.rg = rg;
@@ -90,16 +90,14 @@ public class Pessoa implements Entidade{
     }
 
     public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    this.telefone = telefone;
     }
 
-    public char getSexo() {
+    public Sexo getSexo() {
         return sexo;
     }
 
-    public void setSexo(char sexo) throws ViolacaoRegraNegocioException{
-        if (sexo != 'm' && sexo!= 'M' && sexo!= 'f' && sexo!= 'F' )
-            throw new ViolacaoRegraNegocioException("O Sexo deve ser do tipo M ou F");
+    public void setSexo(Sexo sexo) throws ViolacaoRegraNegocioException{
         this.sexo = sexo;
     }
 
@@ -136,7 +134,7 @@ public class Pessoa implements Entidade{
         hash = 71 * hash + Objects.hashCode(this.nome);
         hash = 71 * hash + Objects.hashCode(this.email);
         hash = 71 * hash + Objects.hashCode(this.telefone);
-        hash = 71 * hash + this.sexo;
+        hash = 71 * hash + Objects.hashCode(this.sexo);
         hash = 71 * hash + Objects.hashCode(this.nascimento);
         hash = 71 * hash + Objects.hashCode(this.endereco);
         return hash;
