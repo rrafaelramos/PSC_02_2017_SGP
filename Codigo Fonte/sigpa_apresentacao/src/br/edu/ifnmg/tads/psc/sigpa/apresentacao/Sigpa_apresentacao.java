@@ -3,16 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sigpa_apresentacao;
+package br.edu.ifnmg.tads.psc.sigpa.apresentacao;
 
 
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Cliente;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ClienteRepositorio;
+import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ConverterData;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Endereco;
+import br.edu.ifnmg.tads.psc.sigpa.aplicacao.EnderecoRepositorio;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.RepositorioBuilder;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Sexo;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ViolacaoRegraNegocioException;
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.util.Date;
 /**
  *
@@ -24,11 +27,12 @@ public class Sigpa_apresentacao {
      * @param args the command line arguments
      * @throws br.edu.ifnmg.tads.psc.sigpa.aplicacao.ViolacaoRegraNegocioException
      */
-    public static void main(String[] args) throws ViolacaoRegraNegocioException {
+    public static void main(String[] args) throws ViolacaoRegraNegocioException, ParseException, ClassNotFoundException {
         // TODO code application logic here
         
     ClienteRepositorio clientes = RepositorioBuilder.getClienteRepositorio();
-       
+        EnderecoRepositorio endereco = RepositorioBuilder.getEnderecoRepositorio();
+    
     Endereco e = new Endereco();
     Cliente c = new Cliente();
       
@@ -39,12 +43,14 @@ public class Sigpa_apresentacao {
     c.setTelefone("12345678");
     c.setSexo(Sexo.Masculino);
     c.setLimite(new BigDecimal(123));
-    c.setNascimento(new Date());
-    c.setEndereco(e);
+    c.setNascimento(ConverterData.FormatarData("07/01/1992"));
     
     
-    boolean Salvar = clientes.Salvar(c);   
+    e.setNumero(2);
+    e.setBairro("teste");
     
+    //boolean Salvar = endereco.Salvar(e);
+    boolean Salva = clientes.Salvar(c);
     }
     
 }

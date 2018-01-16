@@ -18,17 +18,11 @@ public class Funcionario extends Pessoa implements Entidade{
     private int tipo;
     private Date dataAdmissao;
 
-    public Funcionario(String password, String userName, String cargo, long salario, int tipo, Date dataAdmissao) {
-        this.password = password;
-        this.userName = userName;
-        this.cargo = cargo;
-        this.salario = salario;
-        this.tipo = tipo;
-        this.dataAdmissao = dataAdmissao;
+    public Funcionario(long id, String cpf, String rg, String nome, String email, String telefone, Sexo sexo, Date nascimento, Long endereco) {
+        super(id, cpf, rg, nome, email, telefone, sexo, nascimento, endereco);
     }
 
-    public Funcionario() {
-    }
+   
 
     public String getPassword() {
         return password;

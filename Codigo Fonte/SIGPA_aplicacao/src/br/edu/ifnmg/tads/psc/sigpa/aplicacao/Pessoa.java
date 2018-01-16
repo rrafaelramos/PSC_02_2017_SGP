@@ -17,9 +17,9 @@ public class Pessoa implements Entidade{
     private String cpf, rg, nome, email, telefone;
     private Sexo sexo;
     private Date nascimento;
-    private Endereco endereco;
+    private Long endereco;
 
-    public Pessoa(long id, String cpf, String rg, String nome, String email, String telefone, Sexo sexo, Date nascimento, Endereco endereco) {
+    public Pessoa(long id, String cpf, String rg, String nome, String email, String telefone, Sexo sexo, Date nascimento, Long endereco) {
         this.id = id;
         this.cpf = cpf;
         this.rg = rg;
@@ -31,9 +31,9 @@ public class Pessoa implements Entidade{
         this.endereco = endereco;
     }
 
-    public Pessoa() {
+   /* public Pessoa() {
         endereco = new Endereco();
-    }
+    }*/
 
     @Override
     public long getId() {
@@ -110,7 +110,17 @@ public class Pessoa implements Entidade{
         this.nascimento = nascimento;
     }
 
-    public Endereco getEndereco() {
+    public Long getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Long endereco) {
+        this.endereco = endereco;
+    }
+    
+    
+
+    /*public Endereco getEndereco() {
         return endereco;
     }
 
@@ -118,7 +128,7 @@ public class Pessoa implements Entidade{
         if (endereco == null)
             throw new ViolacaoRegraNegocioException("Endereço de preenchimento obrigatório");
         this.endereco = endereco;
-    }
+    }*/
 
     @Override
     public String toString() {

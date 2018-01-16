@@ -7,6 +7,7 @@ package br.edu.ifnmg.tads.psc.sigpa.persistencia;
 
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Cliente;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ClienteRepositorio;
+import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Endereco;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Sexo;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ViolacaoRegraNegocioException;
 import java.sql.Date;
@@ -47,20 +48,22 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
         return "select * from clientes "; 
     }
 
+    
     @Override
     protected void carregaParametros(Cliente obj, PreparedStatement consulta) {
+        EnderecoDAO e =  new EnderecoDAO();
         try {
             consulta.setString(1, obj.getCpf().replace(".", "").replace("-", ""));
             consulta.setString(2, obj.getRg());
-            consulta.setDate(3, (Date) obj.getNascimento());
+            consulta.setDate(3, new java.sql.Date(obj.getNascimento().getTime()));// Convertendo a data para sql
             consulta.setString(5, obj.getEmail());
-            consulta.setString(7, obj.getTelefone());
+            consulta.setString(6, obj.getTelefone());
             consulta.setString(4, obj.getSexo().getValor());
-            consulta.setObject(6, obj.getEndereco());
-            consulta.setBigDecimal(8, obj.getLimite());
-            consulta.setString(9, obj.getNome());
+            consulta.setBigDecimal(7, obj.getLimite());
+            consulta.setString(8, obj.getNome());
+            consulta.setInt(9, e.buscarUltimo());
             if(obj.getId() > 0)
-                consulta.setLong(4, obj.getId());
+                consulta.setLong(9, obj.getId());
             
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -94,8 +97,10 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
             obj.setNascimento(dados.getDate("nascimento"));
             obj.setSexo(Sexo.parse(dados.getString("sexo")));
             obj.setEmail(dados.getString("email"));
+            obj.setEndereco(dados.getLong("endereco"));
             obj.setTelefone(dados.getString("telefone"));
             obj.setLimite(dados.getBigDecimal("limite"));
+            
             
             return obj;
             

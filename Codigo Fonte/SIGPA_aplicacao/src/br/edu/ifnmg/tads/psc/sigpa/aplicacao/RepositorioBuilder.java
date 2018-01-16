@@ -58,6 +58,31 @@ public class RepositorioBuilder {
     }
     
     
+    
+    
+    private static EnderecoRepositorio endereco;
+    
+    public static EnderecoRepositorio getEnderecoRepositorio() throws ClassNotFoundException{
+        if(endereco == null){
+                
+                // Carrega a classe
+                Class obj = Class.forName(prop.getProperty("EnderecoRepositorio"));
+                
+            try {
+                // Cria uma nova instância da classe
+                endereco = (EnderecoRepositorio)obj.newInstance();
+            } catch (InstantiationException | IllegalAccessException ex) {
+                Logger.getLogger(RepositorioBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                         
+        }
+        return endereco;
+    }
+    
+    
+    
+    
+    
    /* private static ProdutoRepositorio produto;
     
     public static ProdutoRepositorio getProdutoRepositorio(){
