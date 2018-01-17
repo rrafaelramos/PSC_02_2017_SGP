@@ -15,21 +15,14 @@ import java.util.Objects;
  */
 public class Cliente extends Pessoa implements Entidade{
     private BigDecimal limite;
-
+    
+    public Cliente(){
+    }
+   
+    
     public Cliente(long id, String cpf, String rg, String nome, String email, String telefone, Sexo sexo, Date nascimento, Long endereco) {
         super(id, cpf, rg, nome, email, telefone, sexo, nascimento, endereco);
     }
-
-    public Cliente() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    /**
-     *
-     */
-   
-
-
     
     public void setLimite(BigDecimal limite){
         this.limite = limite;

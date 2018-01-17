@@ -20,8 +20,6 @@ import java.util.logging.Logger;
  * @author petronio
  */
 public class EnderecoDAO extends DAOGenerico<Endereco> implements EnderecoRepositorio {
-
-    protected Connection conn;
     
     @Override
     protected String consultaAbrir() {
@@ -107,15 +105,19 @@ public class EnderecoDAO extends DAOGenerico<Endereco> implements EnderecoReposi
     }
     
     public int buscarUltimo() throws SQLException{
+              
+                String pegaid = "select max(id) from endereco";
         
-//        PreparedStatement sql = conn.prepareStatement("select max(id) as id from endereco");
-        //ResultSet resultado = sql.executeQuery();
+                PreparedStatement consultaid = BD.getConexao().prepareStatement(pegaid);
         
-        //if(resultado.next()){
-            int tmp = 4 ;// resultado.getInt(1);
-            return tmp;
+                ResultSet retorno = consultaid.executeQuery();
         
-        //return 0;
+                retorno.next();
+                    
+                long id = retorno.getLong(1);
+        return 0;
+                    
+                
     }
-    
+
 }

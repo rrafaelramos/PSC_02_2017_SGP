@@ -49,7 +49,7 @@ public class Sigpa_apresentacao {
     e.setNumero(2);
     e.setBairro("teste");
     
-    //boolean Salvar = endereco.Salvar(e);
+    boolean Salvar = endereco.Salvar(e);
     boolean Salva = clientes.Salvar(c);
     }
     

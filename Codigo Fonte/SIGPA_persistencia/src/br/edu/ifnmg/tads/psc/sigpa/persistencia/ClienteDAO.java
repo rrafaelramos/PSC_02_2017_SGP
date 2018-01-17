@@ -112,4 +112,5 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
         return null;
     }
     
+    
 }
