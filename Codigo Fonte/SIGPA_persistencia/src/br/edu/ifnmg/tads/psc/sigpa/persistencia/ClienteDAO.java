@@ -23,6 +23,9 @@ import java.util.logging.Logger;
  */
 public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositorio {
 
+    
+    private EnderecoDAO endereco = new EnderecoDAO();
+    
     @Override
     protected String consultaAbrir() {
         return "select * from clientes where id = ?";
@@ -30,12 +33,12 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
 
     @Override
     protected String consultaInsert() {
-        return "insert into clientes (cpf, rg, nascimento, sexo, email, endereco, telefone, limite, nome) values(?,?,?,?,?,?,?,?,?)";
+        return "insert into clientes (nome, cpf, rg, nascimento, sexo, email, endereco_fk, telefone, limite) values(?,?,?,?,?,?,?,?,?)";
     }
 
     @Override
     protected String consultaUpdate() {
-        return "update clientes cpf=?, rg=?, nascimento=?, sexo=?, email=?, endereco=?, telefone=?, limite=?, nome=? where id = ?";
+        return "update clientes nome=?, cpf=?, rg=?, nascimento=?, sexo=?, email=?, endereco_fk=?, telefone=?, limite=? where id = ?";
     }
 
     @Override
@@ -47,23 +50,42 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
     protected String consultaBuscar() {
         return "select * from clientes "; 
     }
+    
+    public String  pegaID (){
+        
+        return "select max(id) from endereco";
+    }
+    
+    public long buscarUltimo() throws SQLException{
+              
+                String pegaid = pegaID ();
+        
+                PreparedStatement consultaid = BD.getConexao().prepareStatement(pegaid);
+        
+                ResultSet retorno = consultaid.executeQuery();
+                
+                retorno.next();
+                    
+                long id = retorno.getLong(1);
+                return id;
+                    
+                
+    }
 
     
     @Override
     protected void carregaParametros(Cliente obj, PreparedStatement consulta) {
-        EnderecoDAO e =  new EnderecoDAO();
+        
         try {
-            consulta.setString(1, obj.getCpf().replace(".", "").replace("-", ""));
-            consulta.setString(2, obj.getRg());
-            consulta.setDate(3, new java.sql.Date(obj.getNascimento().getTime()));// Convertendo a data para sql
-            consulta.setString(5, obj.getEmail());
-            consulta.setString(6, obj.getTelefone());
-            consulta.setString(4, obj.getSexo().getValor());
-            consulta.setBigDecimal(7, obj.getLimite());
-            consulta.setString(8, obj.getNome());
-            consulta.setInt(9, e.buscarUltimo());
-            if(obj.getId() > 0)
-                consulta.setLong(9, obj.getId());
+            consulta.setString(1, obj.getNome());
+            consulta.setString(2, obj.getCpf().replace(".", "").replace("-", ""));
+            consulta.setString(3, obj.getRg());
+            consulta.setDate(4, new java.sql.Date(obj.getNascimento().getTime()));// Convertendo a data para sql
+            consulta.setString(5, obj.getSexo().getValor());
+            consulta.setString(6, obj.getEmail());
+            consulta.setLong(7, buscarUltimo());
+            consulta.setString(8,obj.getTelefone());
+            consulta.setBigDecimal(9, obj.getLimite());
             
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -90,17 +112,16 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
     protected Cliente carregaObjeto(ResultSet dados) {
         try {
             Cliente obj = new Cliente();
-            obj.setId(dados.getLong("id"));
-            obj.setNome(dados.getString("nome"));
-            obj.setRg(dados.getString("rg"));
-            obj.setCpf(dados.getString("cpf"));
-            obj.setNascimento(dados.getDate("nascimento"));
-            obj.setSexo(Sexo.parse(dados.getString("sexo")));
-            obj.setEmail(dados.getString("email"));
-            obj.setEndereco(dados.getLong("endereco"));
-            obj.setTelefone(dados.getString("telefone"));
-            obj.setLimite(dados.getBigDecimal("limite"));
-            
+            obj.setId(dados.getLong(1));
+            obj.setNome(dados.getString(2));
+            obj.setRg(dados.getString(3));
+            obj.setCpf(dados.getString(4));
+            obj.setNascimento(dados.getDate(5));
+            obj.setSexo(Sexo.parse(dados.getString(6)));
+            obj.setEmail(dados.getString(7));
+            obj.setEndereco(endereco.Abrir(dados.getInt(8)));
+            obj.setTelefone(dados.getString(9));
+            obj.setLimite(dados.getBigDecimal(10));
             
             return obj;
             

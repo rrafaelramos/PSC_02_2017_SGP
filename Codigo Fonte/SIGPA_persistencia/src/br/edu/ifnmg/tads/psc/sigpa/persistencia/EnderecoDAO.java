@@ -104,20 +104,6 @@ public class EnderecoDAO extends DAOGenerico<Endereco> implements EnderecoReposi
         return null;
     }
     
-    public int buscarUltimo() throws SQLException{
-              
-                String pegaid = "select max(id) from endereco";
-        
-                PreparedStatement consultaid = BD.getConexao().prepareStatement(pegaid);
-        
-                ResultSet retorno = consultaid.executeQuery();
-        
-                retorno.next();
-                    
-                long id = retorno.getLong(1);
-        return 0;
-                    
-                
-    }
+    
 
 }

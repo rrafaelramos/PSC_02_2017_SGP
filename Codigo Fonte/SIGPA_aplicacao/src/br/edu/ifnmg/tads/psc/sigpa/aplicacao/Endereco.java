@@ -10,7 +10,7 @@ package br.edu.ifnmg.tads.psc.sigpa.aplicacao;
  * @author Rafael
  */
 public class Endereco implements Entidade{
-    private long id;
+    long id;
     private String rua, bairro, cidade, complemento, uf, cep;
     private int numero;
 

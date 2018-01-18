@@ -7,6 +7,8 @@ package br.edu.ifnmg.tads.psc.sigpa.aplicacao;
 
 import java.util.Date;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -14,12 +16,17 @@ import java.util.Objects;
  */
 public class Pessoa implements Entidade{
     private long id;
+    private static Pattern regex_cpf = Pattern.compile("^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$");
     private String cpf, rg, nome, email, telefone;
     private Sexo sexo;
     private Date nascimento;
-    private Long endereco;
+    private Endereco endereco;
 
-    public Pessoa(long id, String cpf, String rg, String nome, String email, String telefone, Sexo sexo, Date nascimento, Long endereco) {
+    
+    public Pessoa (){
+    
+    }
+    public Pessoa(long id, String cpf, String rg, String nome, String email, String telefone, Sexo sexo, Date nascimento, Endereco endereco) {
         this.id = id;
         this.cpf = cpf;
         this.rg = rg;
@@ -46,13 +53,16 @@ public class Pessoa implements Entidade{
     }
 
     public String getCpf() {
+        if(cpf != null)
+            return cpf.substring(0,3)+"."+cpf.substring(3,6)+"."+cpf.substring(6,9)+"-"+cpf.substring(9,11);
         return cpf;
     }
 
-    public void setCpf(String cpf) throws ViolacaoRegraNegocioException{
-        if (cpf == null || cpf.isEmpty() || cpf.length() != 11)
-            throw new ViolacaoRegraNegocioException("CPF inválido!");
-        this.cpf = cpf;
+    public void setCpf(String cpf) throws ViolacaoRegraNegocioException {
+        Matcher verificador = regex_cpf.matcher(cpf);
+        if(cpf == null || cpf.isEmpty() || ! verificador.matches())
+            throw new ViolacaoRegraNegocioException("O CPF deve estar no formato ###.###.###-##!");
+        this.cpf = cpf.replace(".", "").replace("-", "");
     }
 
     public String getRg() {
@@ -110,11 +120,11 @@ public class Pessoa implements Entidade{
         this.nascimento = nascimento;
     }
 
-    public Long getEndereco() {
+    public Endereco getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(Long endereco) {
+    public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
     

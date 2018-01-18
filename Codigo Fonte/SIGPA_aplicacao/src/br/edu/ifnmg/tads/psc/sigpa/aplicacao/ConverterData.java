@@ -5,6 +5,8 @@
  */
 package br.edu.ifnmg.tads.psc.sigpa.aplicacao;
 
+import java.sql.Time;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,4 +28,17 @@ public class ConverterData {
         String dataString = format.format(data);
         return dataString;
     }
+    
+    public static Time FormatarHora (String horario) throws ParseException{
+        DateFormat format = new SimpleDateFormat("HH:MM");
+        Time horaSql = new Time (format.parse(horario).getTime());
+        return horaSql;
+    }
+    
+    public static String HoraParaString(Time hora){
+        SimpleDateFormat format = new SimpleDateFormat("HH:MM");
+        String horaString = format.format(hora);
+        return horaString;
+    }
+    
 }

@@ -18,7 +18,7 @@ public class Funcionario extends Pessoa implements Entidade{
     private int tipo;
     private Date dataAdmissao;
 
-    public Funcionario(long id, String cpf, String rg, String nome, String email, String telefone, Sexo sexo, Date nascimento, Long endereco) {
+    public Funcionario(long id, String cpf, String rg, String nome, String email, String telefone, Sexo sexo, Date nascimento, Endereco endereco) {
         super(id, cpf, rg, nome, email, telefone, sexo, nascimento, endereco);
     }
 
