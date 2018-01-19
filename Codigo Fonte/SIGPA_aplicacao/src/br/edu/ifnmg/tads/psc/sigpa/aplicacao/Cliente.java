@@ -9,10 +9,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Objects;
 
-/**
- *
- * @author Bruno
- */
 public class Cliente extends Pessoa implements Entidade{
     private BigDecimal limite;
     

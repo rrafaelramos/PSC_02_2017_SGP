@@ -1,4 +1,6 @@
 -- drop database sigpa;
+
+drop table funcionarios;
 create database sigpa;
 
 use sigpa;
@@ -21,6 +23,7 @@ select * from clientes;
 
 create table funcionarios (
 	id int auto_increment not null,
+    nome varchar (50) not null,
     cpf varchar (11) not null,
     rg varchar (20) not null,
     nascimento date not null,
@@ -30,6 +33,7 @@ create table funcionarios (
     telefone varchar (11) not null,
     admissao date not null,
     cargo varchar(60) not null,
+    salario numeric (10,3),
     username varchar (20) not null,
     senha varchar (20) not null,
     tipo int not null,

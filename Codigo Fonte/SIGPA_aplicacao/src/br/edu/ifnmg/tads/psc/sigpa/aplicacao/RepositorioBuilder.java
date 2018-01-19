@@ -79,7 +79,24 @@ public class RepositorioBuilder {
         return endereco;
     }
     
+     private static FuncionarioRepositorio funcionario;
     
+    public static FuncionarioRepositorio getFuncionarioRepositorio() throws ClassNotFoundException{
+        if(funcionario == null){
+                
+                // Carrega a classe
+                Class obj = Class.forName(prop.getProperty("FuncionarioRepositorio"));
+                
+            try {
+                // Cria uma nova instância da classe
+                funcionario = (FuncionarioRepositorio)obj.newInstance();
+            } catch (InstantiationException | IllegalAccessException ex) {
+                Logger.getLogger(RepositorioBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                         
+        }
+        return funcionario;
+    }
     
     
     

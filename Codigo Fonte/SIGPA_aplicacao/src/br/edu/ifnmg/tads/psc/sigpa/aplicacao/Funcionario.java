@@ -17,12 +17,15 @@ public class Funcionario extends Pessoa implements Entidade{
     private long salario; 
     private int tipo;
     private Date dataAdmissao;
+    
 
-    public Funcionario(long id, String cpf, String rg, String nome, String email, String telefone, Sexo sexo, Date nascimento, Endereco endereco) {
-        super(id, cpf, rg, nome, email, telefone, sexo, nascimento, endereco);
+    public Funcionario(long id, String nome, String cpf, String rg, Date nascimento, Sexo sexo, String email, Endereco endereco, String telefone, String cargo, long salario, String username, String senha, int tipo ) {
+        super(id, nome, cpf, rg, email, telefone, sexo, nascimento, endereco);
     }
 
-   
+    public Funcionario() {
+       
+    }
 
     public String getPassword() {
         return password;
