@@ -13,8 +13,9 @@ import java.util.Objects;
  */
 public class ItemFinanceiro implements Entidade{
     long id;
-    private long precoVenda;
+    private long precoVenda, precoCusto;
     private String descricao;
+    private int estoque;
 
     public ItemFinanceiro() {
     }
@@ -35,6 +36,22 @@ public class ItemFinanceiro implements Entidade{
         this.id = id;
     }
 
+    public long getPrecoCusto() {
+        return precoCusto;
+    }
+
+    public void setPrecoCusto(long precoCusto) {
+        this.precoCusto = precoCusto;
+    }
+
+    public int getEstoque() {
+        return estoque;
+    }
+
+    public void setEstoque(int estoque) {
+        this.estoque = estoque;
+    }
+    
     public long getPrecoVenda() {
         return precoVenda;
     }

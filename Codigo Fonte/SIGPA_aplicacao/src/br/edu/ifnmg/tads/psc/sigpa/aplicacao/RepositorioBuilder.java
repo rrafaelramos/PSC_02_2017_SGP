@@ -98,6 +98,46 @@ public class RepositorioBuilder {
         return funcionario;
     }
     
+    private static FornecedorRepositorio fornecedor;
+    
+    public static FornecedorRepositorio getFornecedorRepositorio() throws ClassNotFoundException{
+        if(fornecedor == null){
+                
+                // Carrega a classe
+                Class obj = Class.forName(prop.getProperty("FornecedorRepositorio"));
+                
+            try {
+                // Cria uma nova instância da classe
+                fornecedor = (FornecedorRepositorio)obj.newInstance();
+            } catch (InstantiationException | IllegalAccessException ex) {
+                Logger.getLogger(RepositorioBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                         
+        }
+        return fornecedor;
+    }
+    
+    
+    
+    private static ItemFinanceiroRepositorio itemFinanceiro;
+    
+    public static ItemFinanceiroRepositorio getItemFinanceiroRepositorio() throws ClassNotFoundException{
+        if(itemFinanceiro == null){
+                
+                // Carrega a classe
+                Class obj = Class.forName(prop.getProperty("ItemFinanceiroRepositorio"));
+                
+            try {
+                // Cria uma nova instância da classe
+                itemFinanceiro = (ItemFinanceiroRepositorio)obj.newInstance();
+            } catch (InstantiationException | IllegalAccessException ex) {
+                Logger.getLogger(RepositorioBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                         
+        }
+        return itemFinanceiro;
+    }
+    
     
     
    /* private static ProdutoRepositorio produto;

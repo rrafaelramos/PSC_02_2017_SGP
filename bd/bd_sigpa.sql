@@ -1,6 +1,6 @@
 -- drop database sigpa;
 
-drop table funcionarios;
+-- drop table funcionarios;
 create database sigpa;
 
 use sigpa;
@@ -17,9 +17,9 @@ create table endereco (
 
 );
 
-select * from endereco;
-select * from funcionarios;
-select * from clientes;
+-- select * from endereco;
+-- select * from funcionarios;
+-- select * from clientes;
 
 create table funcionarios (
 	id int auto_increment not null,
@@ -59,7 +59,7 @@ create table clientes (
 
 );
 
-select * from clientes;
+-- select * from clientes;
 
 create table fornecedores (
 	id int auto_increment not null,
@@ -79,7 +79,7 @@ create table itemfinanceiro (
     precounitario long not null,
     precocusto long not null,
     estoque long not null,
-    tipo int not null,
+    descricao varchar(100),
     primary key (id)
 );
 
