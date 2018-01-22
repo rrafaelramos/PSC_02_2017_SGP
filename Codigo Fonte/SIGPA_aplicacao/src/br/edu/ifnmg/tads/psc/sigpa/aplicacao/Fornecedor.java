@@ -14,7 +14,9 @@ import java.util.Objects;
 public class Fornecedor implements Entidade{
     private long id;
     //verificar endereco com Ananda
-    private String cnpj, nome, representante, endereco, telefone;
+    private String cnpj, nome, representante, telefone, email;
+    private Endereco endereco;
+    
 
     public Fornecedor() {
     }
@@ -29,6 +31,16 @@ public class Fornecedor implements Entidade{
         this.id = id;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    
+    
     public String getCnpj() {
         return cnpj;
     }
@@ -53,11 +65,11 @@ public class Fornecedor implements Entidade{
         this.representante = representante;
     }
 
-    public String getEndereco() {
+    public Endereco getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(String endereco) {
+    public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
 
