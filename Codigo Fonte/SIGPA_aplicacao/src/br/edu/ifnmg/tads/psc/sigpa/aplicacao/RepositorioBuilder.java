@@ -139,6 +139,26 @@ public class RepositorioBuilder {
     }
     
     
+    private static ContasPagarRepositorio contasPagar;
+    
+    public static ContasPagarRepositorio getContasPagarRepositorio() throws ClassNotFoundException{
+        if(contasPagar == null){
+                
+                // Carrega a classe
+                Class obj = Class.forName(prop.getProperty("ContasPagarRepositorio"));
+                
+            try {
+                // Cria uma nova instância da classe
+                contasPagar = (ContasPagarRepositorio)obj.newInstance();
+            } catch (InstantiationException | IllegalAccessException ex) {
+                Logger.getLogger(RepositorioBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                         
+        }
+        return contasPagar;
+    }
+    
+    
     
    /* private static ProdutoRepositorio produto;
     

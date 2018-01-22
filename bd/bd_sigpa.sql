@@ -85,7 +85,7 @@ create table itemfinanceiro (
 
 create table compra (
 	id int auto_increment not null,
-    total int not null,
+    total float not null,
     descricao varchar (120) not null,
     datacompra date not null not null,
     previsao date not null,
@@ -99,7 +99,7 @@ create table venda (
 	id int auto_increment not null,
     datavenda date not null,
     cliente_fk int not null,
-	valorvenda int not null,
+	valorvenda float not null,
     primary key (id),
     foreign key (cliente_fk) references clientes (id)
 );
@@ -107,10 +107,9 @@ create table venda (
 create table contasapagar (
 	id int auto_increment not null,
     descricao varchar(150) not null,
-    valor int not null,
-    venciemnto date not null,
+    valor float not null,
+    vencimento date,
     primary key (id)
-
 );
 
 create table itemvenda (

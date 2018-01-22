@@ -5,9 +5,10 @@
  */
 package br.edu.ifnmg.tads.psc.sigpa.apresentacao;
 
-
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Cliente;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ClienteRepositorio;
+import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ContasPagar;
+import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ContasPagarRepositorio;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ConverterData;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Endereco;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.EnderecoRepositorio;
@@ -38,6 +39,7 @@ public class Sigpa_apresentacao {
         EnderecoRepositorio endereco = RepositorioBuilder.getEnderecoRepositorio();
         FornecedorRepositorio fornecedor = RepositorioBuilder.getFornecedorRepositorio();
         ItemFinanceiroRepositorio itemFinanceiro = RepositorioBuilder.getItemFinanceiroRepositorio();
+        ContasPagarRepositorio contasPagar = RepositorioBuilder.getContasPagarRepositorio();
     
     Endereco e = new Endereco();
     Cliente c = new Cliente();
@@ -71,13 +73,26 @@ public class Sigpa_apresentacao {
     */
    
    ItemFinanceiro i = new ItemFinanceiro();
+   ContasPagar cp = new ContasPagar();
+   cp.setDescricao("nova Conta");
+   cp.setValor(50);
+   
+   boolean salva = contasPagar.Salvar(cp);
+   
    
    i.setDescricao("novo item");
    i.setEstoque(1);
    i.setPrecoVenda(10);
    i.setPrecoCusto(5);
    
-   boolean s = itemFinanceiro.Salvar(i);
+   // boolean s = itemFinanceiro.Salvar(i);
+   
+   
+   
+   
    }
+    
+    
+    
     
 }
