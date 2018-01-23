@@ -72,6 +72,11 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu6.setText("Item Financeiro");
 
         jMenuItem4.setText("Cadastrar item");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem4);
 
         jMenuItem5.setText("Buscar Item");
@@ -162,6 +167,17 @@ public class TelaInicial extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        itemFinanceiro tela;
+        try {
+            tela = new itemFinanceiro(); 
+            this.add(tela);
+            tela.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
