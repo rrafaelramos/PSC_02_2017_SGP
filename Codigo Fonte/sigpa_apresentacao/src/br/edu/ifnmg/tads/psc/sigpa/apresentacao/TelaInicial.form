@@ -62,6 +62,21 @@
                     </MenuItem>
                   </SubComponents>
                 </Menu>
+                <Menu class="javax.swing.JMenu" name="jMenu10">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Fornecedores"/>
+                  </Properties>
+                  <SubComponents>
+                    <MenuItem class="javax.swing.JMenuItem" name="jMenuItem8">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Cadastro de Fornecedor"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem8ActionPerformed"/>
+                      </Events>
+                    </MenuItem>
+                  </SubComponents>
+                </Menu>
                 <Menu class="javax.swing.JMenu" name="jMenu7">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Funcionarios"/>
