@@ -20,6 +20,7 @@ create table endereco (
 -- select * from endereco;
 -- select * from funcionarios;
 -- select * from clientes;
+select * from itemfinanceiro;
 
 create table funcionarios (
 	id int auto_increment not null,
@@ -74,13 +75,19 @@ create table fornecedores (
 
 );
 
+drop table itemfinanceiro;
+
 create table itemfinanceiro (
 	id int auto_increment not null,
+    nome varchar (50) not null,
     precounitario long not null,
     precocusto long not null,
     estoque long not null,
     descricao varchar(100),
-    primary key (id)
+    categoria varchar (20),
+    fornecedor_fk int not null,
+    primary key (id),
+    foreign key (fornecedor_fk) references fornecedores (id)
 );
 
 create table compra (
@@ -112,6 +119,7 @@ create table contasapagar (
     primary key (id)
 );
 
+ drop table itemvenda;
 create table itemvenda (
 	id int auto_increment,
     venda_fk int not null,

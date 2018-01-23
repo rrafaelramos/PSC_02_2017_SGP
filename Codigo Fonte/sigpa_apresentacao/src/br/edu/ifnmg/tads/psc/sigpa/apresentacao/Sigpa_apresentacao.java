@@ -72,7 +72,7 @@ public class Sigpa_apresentacao {
      
     */
    
-   ItemFinanceiro i = new ItemFinanceiro();
+   /*ItemFinanceiro i = new ItemFinanceiro();
    ContasPagar cp = new ContasPagar();
    cp.setDescricao("nova Conta");
    cp.setValor(50);
@@ -83,7 +83,7 @@ public class Sigpa_apresentacao {
    i.setDescricao("novo item");
    i.setEstoque(1);
    i.setPrecoVenda(10);
-   i.setPrecoCusto(5);
+   i.setPrecoCusto(5);*/
    
    // boolean s = itemFinanceiro.Salvar(i);
    

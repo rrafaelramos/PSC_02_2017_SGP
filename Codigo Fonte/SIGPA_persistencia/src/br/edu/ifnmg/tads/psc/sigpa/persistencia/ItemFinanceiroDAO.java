@@ -27,12 +27,12 @@ public class ItemFinanceiroDAO extends DAOGenerico<ItemFinanceiro> implements It
 
     @Override
     protected String consultaInsert() {
-        return "insert into itemfinanceiro (precounitario, precocusto, estoque, descricao) values(?,?,?,?)";
+        return "insert into itemfinanceiro (nome, precounitario, precocusto, estoque, descricao, categoria, fornecedor_fk) values(?,?,?,?,?,?,?)";
     }
 
     @Override
     protected String consultaUpdate() {
-        return "update itemfinanceiro precounitario=?, precocusto=?, estoque=?, descricao=? where id = ?";
+        return "update itemfinanceiro nome=?, precounitario=?, precocusto=?, estoque=?, descricao=?, categoria=?, fornecedor_fk=? where id = ?";
     }
 
     @Override
@@ -49,10 +49,13 @@ public class ItemFinanceiroDAO extends DAOGenerico<ItemFinanceiro> implements It
     protected void carregaParametros(ItemFinanceiro obj, PreparedStatement consulta) {
        
         try {
-            consulta.setLong(1, obj.getPrecoVenda());
-            consulta.setLong(2, obj.getPrecoCusto());
-            consulta.setInt(3, obj.getEstoque());
-            consulta.setString(4, obj.getDescricao());
+            consulta.setString(1, obj.getNome());
+            consulta.setLong(2, obj.getPrecoVenda());
+            consulta.setLong(3, obj.getPrecoCusto());
+            consulta.setInt(4, obj.getEstoque());
+            consulta.setString(5, obj.getDescricao());
+            consulta.setString(6, obj.getCategoria());
+            consulta.setInt(7, obj.getFornecedor());
         } catch (SQLException ex) {
             Logger.getLogger(ItemFinanceiroDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -65,8 +68,11 @@ public class ItemFinanceiroDAO extends DAOGenerico<ItemFinanceiro> implements It
         if(obj.getId() > 0)
             sql = this.filtrarPor(sql, "id", Long.toString( obj.getId() ));
         
-        if(obj.getDescricao()!= null && !obj.getDescricao().isEmpty())
-            sql = this.filtrarPor(sql, "descricao", obj.getDescricao());
+        if(obj.getNome()!= null && !obj.getNome().isEmpty())
+            sql = this.filtrarPor(sql, "nome", obj.getDescricao());
+        
+        if(obj.getClass()!= null && !obj.getCategoria().isEmpty())
+            sql = this.filtrarPor(sql, "categoria", obj.getDescricao());
         
         return sql;
     }
@@ -76,10 +82,13 @@ public class ItemFinanceiroDAO extends DAOGenerico<ItemFinanceiro> implements It
         try {
             ItemFinanceiro obj = new ItemFinanceiro();
             obj.setId(dados.getLong(1));
-            obj.setPrecoVenda(dados.getLong(2));
-            obj.setPrecoCusto(dados.getLong(3));
+            obj.setNome(dados.getString(2));
+            obj.setPrecoVenda(dados.getLong(3));
+            obj.setPrecoCusto(dados.getLong(4));
             obj.setEstoque(dados.getInt(4));
             obj.setDescricao(dados.getString(5));
+            obj.setCategoria(dados.getString(6));
+            obj.setFornecedor(dados.getInt(7));
             
             return obj;
             

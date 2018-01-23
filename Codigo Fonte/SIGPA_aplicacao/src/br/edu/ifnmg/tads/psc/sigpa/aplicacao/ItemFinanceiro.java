@@ -14,17 +14,48 @@ import java.util.Objects;
 public class ItemFinanceiro implements Entidade{
     long id;
     private long precoVenda, precoCusto;
-    private String descricao;
-    private int estoque;
+    private String descricao, nome, categoria;
+    private int estoque, fornecedor;
 
     public ItemFinanceiro() {
     }
 
-    public ItemFinanceiro(long id, long precoVenda, String descricao) {
+    public ItemFinanceiro(long id, long precoVenda, long precoCusto, String descricao, String nome, String categoria, int estoque, int fornecedor) {
         this.id = id;
         this.precoVenda = precoVenda;
+        this.precoCusto = precoCusto;
         this.descricao = descricao;
+        this.nome = nome;
+        this.categoria = categoria;
+        this.estoque = estoque;
+        this.fornecedor = fornecedor;
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public int getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(int fornecedor) {
+        this.fornecedor = fornecedor;
+    }
+
+    
 
     @Override
     public long getId() {
