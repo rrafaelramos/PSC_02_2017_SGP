@@ -41,6 +41,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu10 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
@@ -95,6 +96,14 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         jMenu10.add(jMenuItem8);
+
+        jMenuItem9.setText("Buscar Fornecedor");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu10.add(jMenuItem9);
 
         jMenu4.add(jMenu10);
 
@@ -205,6 +214,17 @@ public class TelaInicial extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        BuscarFornecedor telabusca;
+        try {
+            telabusca = new BuscarFornecedor();
+            this.add(telabusca);
+            telabusca.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -260,5 +280,6 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }

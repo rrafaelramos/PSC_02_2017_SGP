@@ -86,7 +86,7 @@ public class FornecedorDAO extends DAOGenerico<Fornecedor> implements Fornecedor
         String sql = "";
         
         if(obj.getId() > 0)
-            sql = this.filtrarPor(sql, "id", Long.toString( obj.getId() ));
+            sql = this.filtrarPor(sql, "id", Long.toString( obj.getId()));
         
         if(obj.getNome() != null && !obj.getNome().isEmpty())
             sql = this.filtrarPor(sql, "nome", obj.getNome());
@@ -107,8 +107,7 @@ public class FornecedorDAO extends DAOGenerico<Fornecedor> implements Fornecedor
             obj.setTelefone(dados.getString(4));
             obj.setEmail(dados.getString(5));
             obj.setNome(dados.getString(6));
-            obj.setEmail(dados.getString(7));
-            obj.setRepresentante(dados.getString(8));
+            obj.setRepresentante(dados.getString(7));
             
             
             return obj;
