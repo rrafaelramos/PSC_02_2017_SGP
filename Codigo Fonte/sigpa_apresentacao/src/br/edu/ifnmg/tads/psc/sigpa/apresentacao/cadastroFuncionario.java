@@ -182,6 +182,12 @@ public class cadastroFuncionario extends javax.swing.JInternalFrame {
 
         jLabel13.setText("CEP");
 
+        txt_cep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_cepActionPerformed(evt);
+            }
+        });
+
         jLabel14.setText("Data Admissão");
 
         try {
@@ -479,6 +485,10 @@ public class cadastroFuncionario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_usernameActionPerformed
 
+    private void txt_cepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cepActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_cepActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton btn_feminino;
@@ -566,8 +576,4 @@ public class cadastroFuncionario extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(rootPane, "NÃO FOI POSSIVEL FAZER O CADASTRO!");
         }
     }
-    
-    
-
-
 }
