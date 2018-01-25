@@ -204,9 +204,9 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
-        CadastroFornecedor tela;
+        EditarFornecedor tela;
         try {
-            tela = new CadastroFornecedor(); 
+            tela = new EditarFornecedor(); 
             this.add(tela);
             tela.setVisible(true);
         } catch (ClassNotFoundException ex) {
@@ -216,13 +216,9 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         BuscarFornecedor telabusca;
-        try {
-            telabusca = new BuscarFornecedor();
-            this.add(telabusca);
-            telabusca.setVisible(true);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        telabusca = new BuscarFornecedor();
+        this.add(telabusca);
+        telabusca.setVisible(true);
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     /**

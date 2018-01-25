@@ -7,6 +7,7 @@ package br.edu.ifnmg.tads.psc.sigpa.apresentacao;
 
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Fornecedor;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.RepositorioBuilder;
+import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ViolacaoRegraNegocioException;
 import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -19,10 +20,17 @@ import javax.swing.table.DefaultTableModel;
  */
 public class BuscarFornecedor extends FormBuscar<Fornecedor> {
 
-    public BuscarFornecedor() throws ClassNotFoundException {
-        initComponents();
-        //setEditar(new FornecedorEditar());
-        setRepositorio(RepositorioBuilder.getFornecedorRepositorio());
+    /**
+     *
+     */
+    public BuscarFornecedor() {
+        try {
+            initComponents();
+            setEditar(new EditarFornecedor());
+            setRepositorio(RepositorioBuilder.getFornecedorRepositorio());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BuscarFornecedor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 @Override
@@ -89,6 +97,7 @@ public class BuscarFornecedor extends FormBuscar<Fornecedor> {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabResultado = new javax.swing.JTable();
 
+        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
@@ -183,7 +192,7 @@ public class BuscarFornecedor extends FormBuscar<Fornecedor> {
     }//GEN-LAST:event_btn_buscarActionPerformed
 
     private void btn_novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_novoActionPerformed
-       //novo(); 
+       novo(); 
     }//GEN-LAST:event_btn_novoActionPerformed
 
 
@@ -199,5 +208,12 @@ public class BuscarFornecedor extends FormBuscar<Fornecedor> {
     private javax.swing.JTextField txt_nome;
     // End of variables declaration//GEN-END:variables
 
+    private void tabResultadoMouseClicked(java.awt.event.MouseEvent evt) {                                          
+        int linha = tabResultado.getSelectedRow();
+        
+        long id = Long.parseLong(tabResultado.getValueAt(linha, 0).toString() );
+        
+        editar(id);
+    }
 }
 

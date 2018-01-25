@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
  *
  * @author Jéssica Ramos
  */
-public class CadastroFornecedor extends javax.swing.JInternalFrame {
+public class EditarFornecedor extends FormEditar<Fornecedor> {
 
     FornecedorRepositorio fornecedor;
     EnderecoRepositorio endereco;
@@ -31,7 +31,7 @@ public class CadastroFornecedor extends javax.swing.JInternalFrame {
    
     /** Creates new form CadastroFornecedor
      * @throws java.lang.ClassNotFoundException */
-    public CadastroFornecedor() throws ClassNotFoundException {
+    public EditarFornecedor() throws ClassNotFoundException {
         
         try {
             initComponents();
@@ -40,7 +40,7 @@ public class CadastroFornecedor extends javax.swing.JInternalFrame {
             endereco=RepositorioBuilder.getEnderecoRepositorio();
             fornecedor = RepositorioBuilder.getFornecedorRepositorio();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CadastroFornecedor.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EditarFornecedor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -266,7 +266,7 @@ public class CadastroFornecedor extends javax.swing.JInternalFrame {
             salvar();
             limparCampos();
         } catch (ViolacaoRegraNegocioException | ParseException ex) {
-            Logger.getLogger(CadastroFornecedor.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EditarFornecedor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_salvarActionPerformed
 
@@ -314,7 +314,8 @@ public class CadastroFornecedor extends javax.swing.JInternalFrame {
     }
 
 
-    private void salvar() {
+    @Override
+    protected void salvar() {
         if (endereco.Salvar(e) && (fornecedor.Salvar(f))){
             JOptionPane.showMessageDialog(rootPane, "Fornecedor cadastrado com sucesso!");
         } else{
@@ -333,5 +334,45 @@ public class CadastroFornecedor extends javax.swing.JInternalFrame {
        txt_numero.setText("");
        txt_rua.setText("");
        txt_telefone.setText("");
+    }
+
+    /**
+     *
+     * @throws ViolacaoRegraNegocioException
+     */
+    @Override
+    protected void carregaObjeto() throws ViolacaoRegraNegocioException {
+        entidade.setCnpj(txt_cnpj.getText());
+        entidade.setNome(txt_nome.getText());
+        entidade.setEmail(txt_email.getText());
+        entidade.setTelefone(txt_telefone.getText());
+        entidade.setEndereco(e);
+        entidade.setRepresentante(txt_representante.getText());
+   
+        /*e.setRua(txt_rua.getText());
+        e.setNumero(new Integer(txt_numero.getText()));
+        e.setBairro(txt_bairro.getText());
+        e.setCidade(txt_cidade.getText());
+        e.setUf((String) cb_uf.getSelectedItem());
+        e.setCep(txt_cep.getText());
+        */    
+    }
+
+    @Override
+    protected void carregaCampos() {
+       txt_bairro.setText(e.getBairro());
+       txt_cep.setText(e.getCep());
+       txt_cidade.setText(e.getCidade());
+       txt_cnpj.setText(f.getCnpj());
+       txt_email.setText(f.getEmail());
+       txt_representante.setText(f.getRepresentante());
+       txt_nome.setText(f.getNome());
+        try {
+            txt_numero.setText(Integer.toString(e.getNumero()));
+        } catch (ViolacaoRegraNegocioException ex) {
+            Logger.getLogger(EditarFornecedor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       txt_rua.setText(e.getRua());
+       txt_telefone.setText(f.getTelefone());
     }
 }
