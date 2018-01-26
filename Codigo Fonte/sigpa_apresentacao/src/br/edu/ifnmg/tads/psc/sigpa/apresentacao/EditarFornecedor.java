@@ -15,13 +15,14 @@ import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ViolacaoRegraNegocioException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Jéssica Ramos
  */
-public class EditarFornecedor extends FormEditar<Fornecedor> {
+public class EditarFornecedor extends javax.swing.JInternalFrame{
 
     FornecedorRepositorio fornecedor;
     EnderecoRepositorio endereco;
@@ -32,16 +33,11 @@ public class EditarFornecedor extends FormEditar<Fornecedor> {
     /** Creates new form CadastroFornecedor
      * @throws java.lang.ClassNotFoundException */
     public EditarFornecedor() throws ClassNotFoundException {
-        
-        try {
             initComponents();
             e = new Endereco();
             f = new Fornecedor();
             endereco=RepositorioBuilder.getEnderecoRepositorio();
-            fornecedor = RepositorioBuilder.getFornecedorRepositorio();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(EditarFornecedor.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            fornecedor=RepositorioBuilder.getFornecedorRepositorio(); 
     }
 
     /** This method is called from within the constructor to
@@ -56,7 +52,6 @@ public class EditarFornecedor extends FormEditar<Fornecedor> {
         jLabel1 = new javax.swing.JLabel();
         txt_nome = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txt_cnpj = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txt_email = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -73,9 +68,10 @@ public class EditarFornecedor extends FormEditar<Fornecedor> {
         jLabel9 = new javax.swing.JLabel();
         txt_cidade = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        txt_cep = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         cb_uf = new javax.swing.JComboBox<>();
+        txt_cnpj = new javax.swing.JFormattedTextField();
+        txt_cep = new javax.swing.JFormattedTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -85,12 +81,6 @@ public class EditarFornecedor extends FormEditar<Fornecedor> {
         jLabel1.setText("Nome: ");
 
         jLabel2.setText("CNPJ:");
-
-        txt_cnpj.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_cnpjActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("E-Mail:");
 
@@ -121,15 +111,21 @@ public class EditarFornecedor extends FormEditar<Fornecedor> {
 
         jLabel10.setText("CEP:");
 
-        txt_cep.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_cepActionPerformed(evt);
-            }
-        });
-
         jLabel11.setText("UF:");
 
         cb_uf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+
+        try {
+            txt_cnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            txt_cep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###-###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -147,7 +143,7 @@ public class EditarFornecedor extends FormEditar<Fornecedor> {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addGap(18, 18, 18)
-                        .addComponent(txt_cep, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_cep, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,16 +153,13 @@ public class EditarFornecedor extends FormEditar<Fornecedor> {
                                 .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txt_telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txt_cnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 29, Short.MAX_VALUE))))
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txt_telefone, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                                    .addComponent(txt_cnpj))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
@@ -234,7 +227,7 @@ public class EditarFornecedor extends FormEditar<Fornecedor> {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(txt_cep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txt_representante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -246,17 +239,9 @@ public class EditarFornecedor extends FormEditar<Fornecedor> {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txt_cnpjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cnpjActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_cnpjActionPerformed
-
     private void txt_numeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_numeroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_numeroActionPerformed
-
-    private void txt_cepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cepActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_cepActionPerformed
 
     private void btn_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salvarActionPerformed
         try {
@@ -286,9 +271,9 @@ public class EditarFornecedor extends FormEditar<Fornecedor> {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField txt_bairro;
-    private javax.swing.JTextField txt_cep;
+    private javax.swing.JFormattedTextField txt_cep;
     private javax.swing.JTextField txt_cidade;
-    private javax.swing.JTextField txt_cnpj;
+    private javax.swing.JFormattedTextField txt_cnpj;
     private javax.swing.JTextField txt_email;
     private javax.swing.JTextField txt_nome;
     private javax.swing.JTextField txt_numero;
@@ -314,7 +299,6 @@ public class EditarFornecedor extends FormEditar<Fornecedor> {
     }
 
 
-    @Override
     protected void salvar() {
         if (endereco.Salvar(e) && (fornecedor.Salvar(f))){
             JOptionPane.showMessageDialog(rootPane, "Fornecedor cadastrado com sucesso!");
@@ -340,25 +324,21 @@ public class EditarFornecedor extends FormEditar<Fornecedor> {
      *
      * @throws ViolacaoRegraNegocioException
      */
-    @Override
     protected void carregaObjeto() throws ViolacaoRegraNegocioException {
-        entidade.setCnpj(txt_cnpj.getText());
-        entidade.setNome(txt_nome.getText());
-        entidade.setEmail(txt_email.getText());
-        entidade.setTelefone(txt_telefone.getText());
-        entidade.setEndereco(e);
-        entidade.setRepresentante(txt_representante.getText());
-   
-        /*e.setRua(txt_rua.getText());
+        f.setCnpj(txt_cnpj.getText());
+        f.setNome(txt_nome.getText());
+        f.setEmail(txt_email.getText());
+        f.setTelefone(txt_telefone.getText());
+        e.setRua(txt_rua.getText());
         e.setNumero(new Integer(txt_numero.getText()));
         e.setBairro(txt_bairro.getText());
         e.setCidade(txt_cidade.getText());
         e.setUf((String) cb_uf.getSelectedItem());
-        e.setCep(txt_cep.getText());
-        */    
+        e.setCep(txt_cep.getText());  
+        f.setRepresentante(txt_representante.getText()); 
+        f.setEndereco(e);
     }
 
-    @Override
     protected void carregaCampos() {
        txt_bairro.setText(e.getBairro());
        txt_cep.setText(e.getCep());
@@ -367,11 +347,7 @@ public class EditarFornecedor extends FormEditar<Fornecedor> {
        txt_email.setText(f.getEmail());
        txt_representante.setText(f.getRepresentante());
        txt_nome.setText(f.getNome());
-        try {
-            txt_numero.setText(Integer.toString(e.getNumero()));
-        } catch (ViolacaoRegraNegocioException ex) {
-            Logger.getLogger(EditarFornecedor.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       txt_numero.setText(Integer.toString(e.getNumero()));
        txt_rua.setText(e.getRua());
        txt_telefone.setText(f.getTelefone());
     }

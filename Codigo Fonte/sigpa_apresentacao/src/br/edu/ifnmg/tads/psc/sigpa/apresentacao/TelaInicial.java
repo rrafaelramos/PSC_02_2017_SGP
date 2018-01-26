@@ -215,10 +215,14 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        BuscarFornecedor telabusca;
-        telabusca = new BuscarFornecedor();
-        this.add(telabusca);
-        telabusca.setVisible(true);
+        try {
+            BuscarFornecedor telabusca;
+            telabusca = new BuscarFornecedor();
+            this.add(telabusca);
+            telabusca.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     /**

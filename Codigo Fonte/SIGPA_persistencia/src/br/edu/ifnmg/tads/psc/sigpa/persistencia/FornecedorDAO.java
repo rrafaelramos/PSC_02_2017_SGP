@@ -70,7 +70,7 @@ public class FornecedorDAO extends DAOGenerico<Fornecedor> implements Fornecedor
     protected void carregaParametros(Fornecedor obj, PreparedStatement consulta) {
         
         try {
-            consulta.setString(1, obj.getCnpj().replace(".", "").replace("-", ""));
+            consulta.setString(1, obj.getCnpj().replace(".", "").replace("-", "").replace("/",""));
             consulta.setLong(2, buscarUltimo());
             consulta.setString(3, obj.getTelefone());
             consulta.setString(4, obj.getEmail());
@@ -92,7 +92,7 @@ public class FornecedorDAO extends DAOGenerico<Fornecedor> implements Fornecedor
             sql = this.filtrarPor(sql, "nome", obj.getNome());
         
         if(obj.getCnpj()!= null && !obj.getCnpj().isEmpty())
-            sql = this.filtrarPor(sql, "cnpj", obj.getCnpj().replace(".", "").replace("-", ""));        
+            sql = this.filtrarPor(sql, "cnpj", obj.getCnpj().replace(".", "").replace("-", "").replace("/",""));        
         
         return sql;
     }
@@ -102,7 +102,7 @@ public class FornecedorDAO extends DAOGenerico<Fornecedor> implements Fornecedor
         try {
             Fornecedor obj = new Fornecedor();
             obj.setId(dados.getLong(1));
-            obj.setCnpj(dados.getString(2));
+            obj.setCnpj(dados.getString(2).replace(".", "").replace("-", "").replace("/",""));
             obj.setEndereco(endereco.Abrir(dados.getInt(3)));
             obj.setTelefone(dados.getString(4));
             obj.setEmail(dados.getString(5));

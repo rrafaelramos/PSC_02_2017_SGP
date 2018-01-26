@@ -6,12 +6,10 @@
 package br.edu.ifnmg.tads.psc.sigpa.apresentacao;
 
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Fornecedor;
+import br.edu.ifnmg.tads.psc.sigpa.aplicacao.FornecedorRepositorio;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.RepositorioBuilder;
-import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ViolacaoRegraNegocioException;
 import java.util.List;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,15 +20,21 @@ public class BuscarFornecedor extends FormBuscar<Fornecedor> {
 
     /**
      *
+     * @throws java.lang.ClassNotFoundException
      */
-    public BuscarFornecedor() {
-        try {
+    FornecedorRepositorio fornecedor;
+    public BuscarFornecedor() throws ClassNotFoundException {
             initComponents();
-            setEditar(new EditarFornecedor());
             setRepositorio(RepositorioBuilder.getFornecedorRepositorio());
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(BuscarFornecedor.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            BuscarFornecedor editar;
+    }
+    
+    private void tabResultadoMouseClicked(java.awt.event.MouseEvent evt) throws ClassNotFoundException{                                          
+        int linha = tabResultado.getSelectedRow();
+        
+        long id = Long.parseLong(tabResultado.getValueAt(linha, 0).toString());
+        
+        editar(id);
     }
     
 @Override
@@ -39,7 +43,7 @@ public class BuscarFornecedor extends FormBuscar<Fornecedor> {
             
         modelo.addColumn("ID");
         modelo.addColumn("CNPJ");
-        modelo.addColumn("Endereço");
+        modelo.addColumn("Cidade");
         modelo.addColumn("Telefone");
         modelo.addColumn("Nome");
         modelo.addColumn("Representante");
@@ -208,12 +212,5 @@ public class BuscarFornecedor extends FormBuscar<Fornecedor> {
     private javax.swing.JTextField txt_nome;
     // End of variables declaration//GEN-END:variables
 
-    private void tabResultadoMouseClicked(java.awt.event.MouseEvent evt) {                                          
-        int linha = tabResultado.getSelectedRow();
-        
-        long id = Long.parseLong(tabResultado.getValueAt(linha, 0).toString() );
-        
-        editar(id);
-    }
 }
 
