@@ -17,22 +17,22 @@ public class Compra implements Entidade{
     private long valorTotal;
     private String descricao;
     private Date dataCompra, previsaoChegada;
-    private Funcionario funcionario;
-    private Fornecedor fornecedor;
+    private long fornecedor;
 
     public Compra() {
     }
 
-    public Compra(long id, long valorTotal, String descricao, Date dataCompra, Date previsaoChegada, Funcionario funcionario, Fornecedor fornecedor) {
+    public Compra(long id, long valorTotal, String descricao, Date dataCompra, Date previsaoChegada, Funcionario funcionario, int fornecedor) {
         this.id = id;
         this.valorTotal = valorTotal;
         this.descricao = descricao;
         this.dataCompra = dataCompra;
         this.previsaoChegada = previsaoChegada;
-        this.funcionario = funcionario;
         this.fornecedor = fornecedor;
     }
-
+    
+    
+    
     @Override
     public long getId() {
         return id;
@@ -77,25 +77,15 @@ public class Compra implements Entidade{
         this.previsaoChegada = previsaoChegada;
     }
 
-    public Funcionario getFuncionario() {
-        return funcionario;
-    }
-
-    public void setFuncionario(Funcionario funcionario) throws ViolacaoRegraNegocioException{
-        if(funcionario == null)
-            throw new ViolacaoRegraNegocioException("Funcionario é de preenchimento obrigatório!");
-        this.funcionario = funcionario;
-    }
-
-    public Fornecedor getFornecedor() {
+    public long getFornecedor() {
         return fornecedor;
     }
 
-    public void setFornecedor(Fornecedor fornecedor) throws ViolacaoRegraNegocioException{
-        if(fornecedor == null)
-            throw new ViolacaoRegraNegocioException("Fornecedor é de preenchimento obrigatório!");
+    public void setFornecedor(long fornecedor) {
         this.fornecedor = fornecedor;
     }
+    
+    
 
     @Override
     public int hashCode() {
@@ -105,7 +95,6 @@ public class Compra implements Entidade{
         hash = 47 * hash + Objects.hashCode(this.descricao);
         hash = 47 * hash + Objects.hashCode(this.dataCompra);
         hash = 47 * hash + Objects.hashCode(this.previsaoChegada);
-        hash = 47 * hash + Objects.hashCode(this.funcionario);
         hash = 47 * hash + Objects.hashCode(this.fornecedor);
         return hash;
     }
@@ -137,9 +126,6 @@ public class Compra implements Entidade{
         if (!Objects.equals(this.previsaoChegada, other.previsaoChegada)) {
             return false;
         }
-        if (!Objects.equals(this.funcionario, other.funcionario)) {
-            return false;
-        }
         if (!Objects.equals(this.fornecedor, other.fornecedor)) {
             return false;
         }
@@ -148,7 +134,7 @@ public class Compra implements Entidade{
 
     @Override
     public String toString() {
-        return "Compra{" + "id=" + id + ", valorTotal=" + valorTotal + ", descricao=" + descricao + ", dataCompra=" + dataCompra + ", previsaoChegada=" + previsaoChegada + ", funcionario=" + funcionario + ", fornecedor=" + fornecedor + '}';
+        return "Compra{" + "id=" + id + ", valorTotal=" + valorTotal + ", descricao=" + descricao + ", dataCompra=" + dataCompra + ", previsaoChegada=" + previsaoChegada + ", fornecedor=" + fornecedor + '}';
     }
     
     

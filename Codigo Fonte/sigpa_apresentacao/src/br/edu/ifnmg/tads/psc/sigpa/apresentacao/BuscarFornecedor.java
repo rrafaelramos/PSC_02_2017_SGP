@@ -10,6 +10,7 @@ import br.edu.ifnmg.tads.psc.sigpa.aplicacao.FornecedorRepositorio;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.RepositorioBuilder;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,18 +24,9 @@ public class BuscarFornecedor extends FormBuscar<Fornecedor> {
      * @throws java.lang.ClassNotFoundException
      */
     FornecedorRepositorio fornecedor;
-    public BuscarFornecedor() throws ClassNotFoundException {
+    public BuscarFornecedor() throws ClassNotFoundException{
             initComponents();
             setRepositorio(RepositorioBuilder.getFornecedorRepositorio());
-            BuscarFornecedor editar;
-    }
-    
-    private void tabResultadoMouseClicked(java.awt.event.MouseEvent evt) throws ClassNotFoundException{                                          
-        int linha = tabResultado.getSelectedRow();
-        
-        long id = Long.parseLong(tabResultado.getValueAt(linha, 0).toString());
-        
-        editar(id);
     }
     
 @Override
@@ -124,6 +116,7 @@ public class BuscarFornecedor extends FormBuscar<Fornecedor> {
             }
         });
 
+        tabResultado.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tabResultado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -135,6 +128,8 @@ public class BuscarFornecedor extends FormBuscar<Fornecedor> {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabResultado.setShowHorizontalLines(false);
+        tabResultado.setShowVerticalLines(false);
         jScrollPane1.setViewportView(tabResultado);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

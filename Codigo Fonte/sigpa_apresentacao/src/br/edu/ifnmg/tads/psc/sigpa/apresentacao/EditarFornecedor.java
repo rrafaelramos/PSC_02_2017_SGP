@@ -283,19 +283,19 @@ public class EditarFornecedor extends javax.swing.JInternalFrame{
     // End of variables declaration//GEN-END:variables
 
     private void preencherParametros() throws ViolacaoRegraNegocioException, ParseException{
-    f.setCnpj(txt_cnpj.getText());
-    f.setNome(txt_nome.getText());
-    f.setEmail(txt_email.getText());
-    f.setTelefone(txt_telefone.getText());
-    f.setEndereco(e);
-    f.setRepresentante(txt_representante.getText());
-   
-    e.setRua(txt_rua.getText());
-    e.setNumero(new Integer(txt_numero.getText()));
-    e.setBairro(txt_bairro.getText());
-    e.setCidade(txt_cidade.getText());
-    e.setUf((String) cb_uf.getSelectedItem());
-    e.setCep(txt_cep.getText());
+        f.setCnpj(txt_cnpj.getText());
+        f.setNome(txt_nome.getText());
+        f.setEmail(txt_email.getText());
+        f.setTelefone(txt_telefone.getText());
+        f.setRepresentante(txt_representante.getText());
+
+        e.setRua(txt_rua.getText());
+        e.setNumero(new Integer(txt_numero.getText()));
+        e.setBairro(txt_bairro.getText());
+        e.setCidade(txt_cidade.getText());
+        e.setUf((String) cb_uf.getSelectedItem());
+        e.setCep(txt_cep.getText());
+        f.setEndereco(e);
     }
 
 
