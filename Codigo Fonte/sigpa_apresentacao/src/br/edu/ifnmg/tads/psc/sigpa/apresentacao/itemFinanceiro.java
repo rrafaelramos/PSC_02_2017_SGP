@@ -15,6 +15,7 @@ import java.text.ParseException;
  */
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ItemFinanceiroRepositorio;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.RepositorioBuilder;
+import java.math.BigDecimal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -249,8 +250,8 @@ public class itemFinanceiro extends javax.swing.JInternalFrame {
 
 private void preencherParametros() throws ViolacaoRegraNegocioException, ParseException {
     i.setDescricao(txt_descricao.getText());
-    i.setPrecoCusto(new Long (txt_precoCusto.getText()));
-    i.setPrecoVenda(new Long (txt_precoVenda.getText()));
+    i.setPrecoCusto(new BigDecimal(txt_precoCusto.getText()));
+    i.setPrecoVenda(new BigDecimal (txt_precoVenda.getText()));
     i.setEstoque(new Integer (txt_estoque.getText()));
     i.setCategoria((String) cb_categoria.getSelectedItem());
     i.setFornecedor(new Integer (txt_fornecedor.getText()));
@@ -259,7 +260,7 @@ private void preencherParametros() throws ViolacaoRegraNegocioException, ParseEx
 
      private void salvar(){
         
-        if ((i.getPrecoVenda() > 0) && (item.Salvar(i))){
+        if ((i.getPrecoVenda().signum() > 0) && (item.Salvar(i))){
             JOptionPane.showMessageDialog(rootPane, "Item cadastrado com sucesso!");
         } else{
             

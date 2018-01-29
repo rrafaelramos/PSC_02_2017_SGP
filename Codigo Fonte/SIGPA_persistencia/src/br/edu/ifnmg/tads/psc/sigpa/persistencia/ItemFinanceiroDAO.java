@@ -50,8 +50,8 @@ public class ItemFinanceiroDAO extends DAOGenerico<ItemFinanceiro> implements It
        
         try {
             consulta.setString(1, obj.getNome());
-            consulta.setLong(2, obj.getPrecoVenda());
-            consulta.setLong(3, obj.getPrecoCusto());
+            consulta.setBigDecimal(2, obj.getPrecoVenda());
+            consulta.setBigDecimal(3, obj.getPrecoCusto());
             consulta.setInt(4, obj.getEstoque());
             consulta.setString(5, obj.getDescricao());
             consulta.setString(6, obj.getCategoria());
@@ -83,8 +83,8 @@ public class ItemFinanceiroDAO extends DAOGenerico<ItemFinanceiro> implements It
             ItemFinanceiro obj = new ItemFinanceiro();
             obj.setId(dados.getLong(1));
             obj.setNome(dados.getString(2));
-            obj.setPrecoVenda(dados.getLong(3));
-            obj.setPrecoCusto(dados.getLong(4));
+            obj.setPrecoVenda(dados.getBigDecimal(3));
+            obj.setPrecoCusto(dados.getBigDecimal(4));
             obj.setEstoque(dados.getInt(4));
             obj.setDescricao(dados.getString(5));
             obj.setCategoria(dados.getString(6));

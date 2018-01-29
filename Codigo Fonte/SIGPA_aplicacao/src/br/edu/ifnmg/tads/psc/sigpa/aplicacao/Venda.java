@@ -5,7 +5,9 @@
  */
 package br.edu.ifnmg.tads.psc.sigpa.aplicacao;
 
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -15,13 +17,12 @@ public class Venda implements Entidade{
     private long id;
     private Date data;
     private Cliente cliente;
-    private long valorVenda;
+    private BigDecimal valorVenda;
 
     public Venda() {
-        
     }
 
-    public Venda(long id, Date data, Cliente cliente, long valorVenda) {
+    public Venda(long id, Date data, Cliente cliente, BigDecimal valorVenda) {
         this.id = id;
         this.data = data;
         this.cliente = cliente;
@@ -54,12 +55,37 @@ public class Venda implements Entidade{
         this.cliente = cliente;
     }
 
-    public long getValorVenda() {
+    public BigDecimal getValorVenda() {
         return valorVenda;
     }
 
-    public void setValorVenda(long valorVenda) {
+    public void setValorVenda(BigDecimal valorVenda) {
         this.valorVenda = valorVenda;
+    }
+    
+    private List<VendaItem> itens;
+    
+    public List<VendaItem> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<VendaItem> itens) {
+        this.itens = itens;
+    }
+    
+    public void addItem(VendaItem item){
+        if(!this.itens.contains(item)){
+            item.setVenda(this);
+            itens.add(item);
+            this.valorVenda = this.valorVenda.add(item.getValorTotal());
+        }
+    }
+    
+    public void removeItem(VendaItem item){
+        if(this.itens.contains(item)){
+            itens.remove(item);
+            this.valorVenda = this.valorVenda.subtract(item.getValorTotal());
+        }
     }
 
     @Override
