@@ -72,13 +72,13 @@ public class Endereco implements Entidade{
         this.uf = uf;
     }
 
-    public int getNumero() throws ViolacaoRegraNegocioException{
-        if (numero <= 0)
-            throw new ViolacaoRegraNegocioException("Número Inválido");
+    public int getNumero(){
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(int numero)  throws ViolacaoRegraNegocioException{
+        if (numero <= 0)
+            throw new ViolacaoRegraNegocioException("Número Inválido");
         this.numero = numero;
     }
 
@@ -91,12 +91,7 @@ public class Endereco implements Entidade{
         return cep;
     }
 
-    public void setCep(String cep) throws ViolacaoRegraNegocioException{
-        if(cep == null || cep.isEmpty() || cep.length() != 8)
-            throw new ViolacaoRegraNegocioException("CEP inválido");
+    public void setCep(String cep){
         this.cep = cep;
     }
-    
-    
-    
 }

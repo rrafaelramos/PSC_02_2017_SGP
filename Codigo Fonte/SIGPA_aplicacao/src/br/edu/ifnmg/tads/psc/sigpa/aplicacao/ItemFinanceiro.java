@@ -5,6 +5,7 @@
  */
 package br.edu.ifnmg.tads.psc.sigpa.aplicacao;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
@@ -13,14 +14,14 @@ import java.util.Objects;
  */
 public class ItemFinanceiro implements Entidade{
     long id;
-    private long precoVenda, precoCusto;
-    private String descricao, nome, categoria;
-    private int estoque, fornecedor;
+    private BigDecimal precoVenda, precoCusto;
+    private String descricao, nome, categoria, fornecedor;
+    private int estoque;
 
     public ItemFinanceiro() {
     }
 
-    public ItemFinanceiro(long id, long precoVenda, long precoCusto, String descricao, String nome, String categoria, int estoque, int fornecedor) {
+    public ItemFinanceiro(long id, BigDecimal precoVenda, BigDecimal precoCusto, String descricao, String nome, String categoria, int estoque, String fornecedor) {
         this.id = id;
         this.precoVenda = precoVenda;
         this.precoCusto = precoCusto;
@@ -47,15 +48,13 @@ public class ItemFinanceiro implements Entidade{
         this.categoria = categoria;
     }
 
-    public int getFornecedor() {
+    public String getFornecedor() {
         return fornecedor;
     }
 
-    public void setFornecedor(int fornecedor) {
+    public void setFornecedor(String fornecedor) {
         this.fornecedor = fornecedor;
     }
-
-    
 
     @Override
     public long getId() {
@@ -67,11 +66,11 @@ public class ItemFinanceiro implements Entidade{
         this.id = id;
     }
 
-    public long getPrecoCusto() {
+    public BigDecimal getPrecoCusto() {
         return precoCusto;
     }
 
-    public void setPrecoCusto(long precoCusto) {
+    public void setPrecoCusto(BigDecimal precoCusto) {
         this.precoCusto = precoCusto;
     }
 
@@ -83,13 +82,11 @@ public class ItemFinanceiro implements Entidade{
         this.estoque = estoque;
     }
     
-    public long getPrecoVenda() {
+    public BigDecimal getPrecoVenda() {
         return precoVenda;
     }
 
-    public void setPrecoVenda(long precoVenda) throws ViolacaoRegraNegocioException{
-        if(precoVenda < 0)
-            throw new ViolacaoRegraNegocioException("O Valor de venda não pode ser menor que '0' (Zero)");
+    public void setPrecoVenda(BigDecimal precoVenda) throws ViolacaoRegraNegocioException{
         this.precoVenda = precoVenda;
     }
 
@@ -105,15 +102,7 @@ public class ItemFinanceiro implements Entidade{
     public String toString() {
         return "ItemFinanceiro{" + "precoVenda=" + precoVenda + ", descricao=" + descricao + '}';
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 59 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 59 * hash + (int) (this.precoVenda ^ (this.precoVenda >>> 32));
-        hash = 59 * hash + Objects.hashCode(this.descricao);
-        return hash;
-    }
+   
 
     @Override
     public boolean equals(Object obj) {
@@ -137,6 +126,15 @@ public class ItemFinanceiro implements Entidade{
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 37 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 37 * hash + Objects.hashCode(this.precoVenda);
+        hash = 37 * hash + Objects.hashCode(this.descricao);
+        return hash;
     }
     
     

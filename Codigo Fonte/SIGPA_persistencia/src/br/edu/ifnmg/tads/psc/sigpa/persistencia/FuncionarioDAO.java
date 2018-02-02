@@ -88,7 +88,7 @@ public class FuncionarioDAO extends DAOGenerico<Funcionario> implements Funciona
             consulta.setLong(11, obj.getSalario());
             consulta.setString(12, obj.getUserName());
             consulta.setString(13, obj.getPassword());
-            consulta.setInt(14, obj.getTipo());
+            consulta.setString(14, obj.getTipo());
             
         } catch (SQLException ex) {
             Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -129,7 +129,7 @@ public class FuncionarioDAO extends DAOGenerico<Funcionario> implements Funciona
             obj.setSalario(dados.getLong(12));
             obj.setUserName(dados.getString(13));
             obj.setPassword(dados.getString(14));
-            obj.setTipo(dados.getInt(15));
+            obj.setTipo(dados.getString(15));
             return obj;
             
         } catch (SQLException | ViolacaoRegraNegocioException ex) {
@@ -137,6 +137,8 @@ public class FuncionarioDAO extends DAOGenerico<Funcionario> implements Funciona
         }
         return null;
     }
+
+   
 
    
     

@@ -8,7 +8,6 @@ package br.edu.ifnmg.tads.psc.sigpa.persistencia;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Endereco;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.EnderecoRepositorio;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ViolacaoRegraNegocioException;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -43,7 +42,7 @@ public class EnderecoDAO extends DAOGenerico<Endereco> implements EnderecoReposi
 
     @Override
     protected String consultaBuscar() {
-        return "select * from endereco "; 
+        return "select * from endereco"; 
     }
 
     @Override
@@ -54,10 +53,8 @@ public class EnderecoDAO extends DAOGenerico<Endereco> implements EnderecoReposi
             consulta.setString(3, obj.getBairro());
             consulta.setString(4, obj.getCidade());
             consulta.setString(5, obj.getUf());
-            consulta.setString(6, obj.getCep());            
+            consulta.setString(6, obj.getCep().replace(".", "").replace("-", ""));            
         } catch (SQLException ex) {
-            Logger.getLogger(EnderecoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ViolacaoRegraNegocioException ex) {
             Logger.getLogger(EnderecoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -91,18 +88,18 @@ public class EnderecoDAO extends DAOGenerico<Endereco> implements EnderecoReposi
             obj.setBairro(dados.getString("bairro"));
             obj.setCidade(dados.getString("cidade"));
             obj.setUf(dados.getString("uf"));
-            obj.setCep(dados.getString("cep"));
+            obj.setCep(dados.getString("cep").replace(".", "").replace("-", ""));
             
             
             return obj;
             
-        } catch (SQLException ex) {
-            Logger.getLogger(EnderecoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ViolacaoRegraNegocioException ex) {
+        } catch (SQLException | ViolacaoRegraNegocioException ex) {
             Logger.getLogger(EnderecoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
+
+    
     
     
 

@@ -13,13 +13,12 @@ import java.util.Objects;
  * @author Bruno
  */
 public class Funcionario extends Pessoa implements Entidade{
-    private String password, userName, cargo;
+    private String password, userName, cargo, tipo;
     private long salario; 
-    private int tipo;
     private Date dataAdmissao;
     
 
-    public Funcionario(long id, String nome, String cpf, String rg, Date nascimento, Sexo sexo, String email, Endereco endereco, String telefone, String cargo, long salario, String username, String senha, int tipo ) {
+    public Funcionario(long id, String nome, String cpf, String rg, Date nascimento, Sexo sexo, String email, Endereco endereco, String telefone, String cargo, long salario, String username, String senha, String tipo ) {
         super(id, nome, cpf, rg, email, telefone, sexo, nascimento, endereco);
     }
 
@@ -59,11 +58,11 @@ public class Funcionario extends Pessoa implements Entidade{
         this.salario = salario;
     }
 
-    public int getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(int tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 

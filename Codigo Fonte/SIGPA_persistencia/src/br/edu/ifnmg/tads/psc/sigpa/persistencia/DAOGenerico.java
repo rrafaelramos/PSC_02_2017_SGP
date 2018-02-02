@@ -24,6 +24,7 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
     protected abstract String consultaUpdate();
     protected abstract String consultaDelete();
     protected abstract String consultaBuscar();
+     //protected abstract String consultaBuscarNome();
     
     protected abstract void carregaParametros(T obj, PreparedStatement consulta);
     protected abstract String carregaParametrosBusca(T obj);
@@ -168,4 +169,7 @@ public abstract class DAOGenerico<T extends Entidade> implements Repositorio<T> 
         
         return resultado;
     }
+    
+    
+    
 }

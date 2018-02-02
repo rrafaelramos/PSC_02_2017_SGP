@@ -5,17 +5,10 @@
  */
 package br.edu.ifnmg.tads.psc.sigpa.aplicacao;
 
-import java.util.List;
-
 /**
  *
  * @author petronio
  */
-public interface Repositorio<T> {
-    boolean Salvar(T obj);
-    T Abrir(long id);
-    boolean Apagar(T obj);
-    List<T> Buscar(T filtro);
-    
+public interface CompraRepositorio extends Repositorio<Compra> {
     
 }

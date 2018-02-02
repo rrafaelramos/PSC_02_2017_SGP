@@ -116,7 +116,7 @@ public class Fornecedor implements Entidade{
 
     @Override
     public String toString() {
-        return "Fornecedor{" + "id=" + id + ", cnpj=" + cnpj + ", nome=" + nome + ", representante=" + representante + ", endereco=" + endereco + ", telefone=" + telefone + '}';
+        return  nome ;
     }
     
     

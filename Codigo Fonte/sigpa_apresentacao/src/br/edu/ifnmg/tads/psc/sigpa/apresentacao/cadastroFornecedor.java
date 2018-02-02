@@ -5,11 +5,12 @@
  */
 package br.edu.ifnmg.tads.psc.sigpa.apresentacao;
 
-import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Cliente;
-import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ClienteRepositorio;
+
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ConverterData;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Endereco;
+import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Fornecedor;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.EnderecoRepositorio;
+import br.edu.ifnmg.tads.psc.sigpa.aplicacao.FornecedorRepositorio;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.RepositorioBuilder;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Sexo;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ViolacaoRegraNegocioException;
@@ -23,22 +24,21 @@ import javax.swing.JOptionPane;
  *
  * @author ananda
  */
-public class cadastroCliente extends javax.swing.JInternalFrame {
-    ClienteRepositorio clientes;
+public class cadastroFornecedor extends javax.swing.JInternalFrame {
+    FornecedorRepositorio fornecedor;
     EnderecoRepositorio endereco;
     
     Endereco e;
-    Cliente c;
-    
+    Fornecedor f;
     /**
      * Creates new form cadastroCliente
      */
-    public cadastroCliente() throws ClassNotFoundException {
+    public cadastroFornecedor() throws ClassNotFoundException {
         initComponents();
         e = new Endereco();
-        c = new Cliente();
+        f = new Fornecedor();
         endereco=RepositorioBuilder.getEnderecoRepositorio();
-        clientes = RepositorioBuilder.getClienteRepositorio();
+        fornecedor = RepositorioBuilder.getFornecedorRepositorio();
     }
 
     /**
@@ -50,16 +50,12 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txt_nome = new javax.swing.JTextField();
+        btn_novo = new javax.swing.JButton();
+        txt_cnpj = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txt_rg = new javax.swing.JTextField();
+        txt_nome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txt_cpf = new javax.swing.JFormattedTextField();
-        txt_data_nascimento = new javax.swing.JFormattedTextField();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        txt_masculino = new javax.swing.JRadioButton();
-        txt_feminino = new javax.swing.JRadioButton();
         jLabel6 = new javax.swing.JLabel();
         txt_email = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -76,54 +72,38 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
         cb_uf = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        btn_cancelar = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         txt_cep = new javax.swing.JFormattedTextField();
-        txt_limit = new javax.swing.JTextField();
+        txt_representante = new javax.swing.JTextField();
         btn_novo1 = new javax.swing.JButton();
 
+        btn_novo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/tads/psc/sigpa/apresentacao/add(2).png"))); // NOI18N
+        btn_novo.setText("Novo");
+        btn_novo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_novoActionPerformed(evt);
+            }
+        });
+
         setClosable(true);
+        setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Cadastro Cliente");
+        setTitle("Cadastro de Fornecedor");
         setVisible(true);
 
-        jLabel2.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        jLabel2.setText("RG");
-
-        txt_rg.addActionListener(new java.awt.event.ActionListener() {
+        txt_nome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_rgActionPerformed(evt);
+                txt_nomeActionPerformed(evt);
             }
         });
 
         jLabel3.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        jLabel3.setText("CPF");
-
-        try {
-            txt_cpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        try {
-            txt_data_nascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        jLabel3.setText("Nome");
 
         jLabel4.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        jLabel4.setText("Data Nas.");
-
-        jLabel5.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        jLabel5.setText("Sexo");
-
-        txt_masculino.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        txt_masculino.setText("M");
-
-        txt_feminino.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        txt_feminino.setText("F");
+        jLabel4.setText("Representante");
 
         jLabel6.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         jLabel6.setText("Email");
@@ -164,19 +144,16 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
             }
         });
 
-        btn_cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/tads/psc/sigpa/apresentacao/cancel(1).png"))); // NOI18N
-        btn_cancelar.setText("Cancelar");
-        btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/tads/psc/sigpa/apresentacao/cancel(1).png"))); // NOI18N
+        jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_cancelarActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        jLabel1.setText("Nome:");
-
-        jLabel14.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        jLabel14.setText("Valor Limite:");
+        jLabel1.setText("CNPJ");
 
         try {
             txt_cep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###-###")));
@@ -186,6 +163,12 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
         txt_cep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_cepActionPerformed(evt);
+            }
+        });
+
+        txt_representante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_representanteActionPerformed(evt);
             }
         });
 
@@ -202,83 +185,73 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel6)
+                            .addGap(4, 4, 4)
+                            .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel7)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txt_telefone))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel8)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txt_rua, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel9))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel10)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txt_bairro, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(4, 4, 4)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel11)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txt_cidade, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txt_numero, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel12)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(cb_uf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(47, 47, 47)
+                                    .addComponent(jLabel13))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGap(48, 48, 48)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txt_cep, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btn_novo1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(56, 56, 56)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(70, 70, 70)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(4, 4, 4)
-                                .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_rg, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_data_nascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_masculino)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txt_feminino))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cb_uf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(47, 47, 47)
-                                .addComponent(jLabel13)
-                                .addGap(18, 18, 18)
-                                .addComponent(txt_cep, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_limit, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(101, 101, 101)
-                                        .addComponent(btn_novo1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel8)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(txt_rua, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jLabel9))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel10)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(txt_bairro, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(4, 4, 4)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel11)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(txt_cidade, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(txt_numero, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(102, 102, 102)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
+                        .addComponent(txt_cnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(151, Short.MAX_VALUE))
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_representante, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,21 +260,17 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(txt_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txt_cnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(txt_representante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txt_rg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_data_nascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(txt_masculino)
-                    .addComponent(txt_feminino))
+                    .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -325,15 +294,13 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
                     .addComponent(jLabel12)
                     .addComponent(cb_uf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
-                    .addComponent(jLabel14)
-                    .addComponent(txt_cep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_limit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                    .addComponent(txt_cep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(btn_cancelar)
+                    .addComponent(jButton2)
                     .addComponent(btn_novo1))
-                .addGap(45, 45, 45))
+                .addGap(42, 42, 42))
         );
 
         getAccessibleContext().setAccessibleDescription("");
@@ -341,33 +308,40 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txt_rgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_rgActionPerformed
+    private void txt_nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_rgActionPerformed
+    }//GEN-LAST:event_txt_nomeActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     try {
         preencherParametros();
-        salvar();
     } catch (ViolacaoRegraNegocioException ex) {
-        Logger.getLogger(cadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(cadastroFornecedor.class.getName()).log(Level.SEVERE, null, ex);
     } catch (ParseException ex) {
-        Logger.getLogger(cadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(cadastroFornecedor.class.getName()).log(Level.SEVERE, null, ex);
     }
-      
+      salvar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cb_ufActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_ufActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cb_ufActionPerformed
 
-    private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.setVisible(false);
-    }//GEN-LAST:event_btn_cancelarActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txt_cepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cepActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_cepActionPerformed
+
+    private void txt_representanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_representanteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_representanteActionPerformed
+
+    private void btn_novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_novoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_novoActionPerformed
 
     private void btn_novo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_novo1ActionPerformed
         limparCampos();
@@ -375,20 +349,19 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_cancelar;
+    private javax.swing.JButton btn_novo;
     private javax.swing.JButton btn_novo1;
     private javax.swing.JComboBox<String> cb_uf;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -396,37 +369,23 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_bairro;
     private javax.swing.JFormattedTextField txt_cep;
     private javax.swing.JTextField txt_cidade;
-    private javax.swing.JFormattedTextField txt_cpf;
-    private javax.swing.JFormattedTextField txt_data_nascimento;
+    private javax.swing.JTextField txt_cnpj;
     private javax.swing.JTextField txt_email;
-    private javax.swing.JRadioButton txt_feminino;
-    private javax.swing.JTextField txt_limit;
-    private javax.swing.JRadioButton txt_masculino;
     private javax.swing.JTextField txt_nome;
     private javax.swing.JTextField txt_numero;
-    private javax.swing.JTextField txt_rg;
+    private javax.swing.JTextField txt_representante;
     private javax.swing.JTextField txt_rua;
     private javax.swing.JTextField txt_telefone;
     // End of variables declaration//GEN-END:variables
 
     private void preencherParametros() throws ViolacaoRegraNegocioException, ParseException {
-    c.setCpf(txt_cpf.getText());
-    c.setRg(txt_rg.getText());
-    c.setNome(txt_nome.getText());
-    c.setEmail(txt_email.getText());
-    c.setTelefone(txt_telefone.getText());
-    
-    if(txt_masculino.isSelected())
-    {
-        c.setSexo(Sexo.Masculino);
-    }else
-    {
-        c.setSexo(Sexo.Feminino);
-    }
-    
-    c.setLimite(new BigDecimal(txt_limit.getText()));
-    c.setNascimento(ConverterData.FormatarData(txt_data_nascimento.getText()));
-    c.setEndereco(e);
+    f.setCnpj(txt_cnpj.getText());
+    f.setEmail(txt_email.getText());
+    f.setNome(txt_nome.getText());
+    f.setEmail(txt_email.getText());
+    f.setTelefone(txt_telefone.getText());    
+    f.setRepresentante(txt_representante.getText());
+    f.setEndereco(e);
     e.setRua(txt_rua.getText());
     e.setNumero(new Integer(txt_numero.getText()));
     e.setBairro(txt_bairro.getText());
@@ -437,8 +396,8 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
     }
 
     private void salvar() {
-        if (endereco.Salvar(e) && (clientes.Salvar(c))){
-            JOptionPane.showMessageDialog(rootPane, "Cliente cadastrado com sucesso!");
+        if (endereco.Salvar(e) && (fornecedor.Salvar(f))){
+            JOptionPane.showMessageDialog(rootPane, "Fornecedor cadastrado com sucesso!");
         } else{
             
             JOptionPane.showMessageDialog(rootPane, "NÃO FOI POSSIVEL FAZER O CADASTRO!");
@@ -446,21 +405,15 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
     }
 
     private void limparCampos() {
+       txt_representante.setText("");
        txt_bairro.setText("");
        txt_cep.setText("");
        txt_cidade.setText("");
-       txt_cpf.setText("");
-       txt_data_nascimento.setText("");
        txt_email.setText("");
-       txt_feminino.setSelected(false);
-       txt_limit.setText("");
-       txt_masculino.setSelected(false);
-       txt_nome.setText("");
+       txt_cnpj.setText("");
        txt_numero.setText("");
-       txt_rg.setText("");
+       txt_nome.setText("");
        txt_rua.setText("");
        txt_telefone.setText("");
     }
-   
-    
 }

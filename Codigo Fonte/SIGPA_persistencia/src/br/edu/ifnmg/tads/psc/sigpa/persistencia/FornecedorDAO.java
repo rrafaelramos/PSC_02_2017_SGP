@@ -10,6 +10,8 @@ import br.edu.ifnmg.tads.psc.sigpa.aplicacao.FornecedorRepositorio;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -47,6 +49,7 @@ public class FornecedorDAO extends DAOGenerico<Fornecedor> implements Fornecedor
         return "select * from fornecedores"; 
     }
     
+    
     public String  pegaID (){
         
         return "select max(id) from endereco";
@@ -65,12 +68,12 @@ public class FornecedorDAO extends DAOGenerico<Fornecedor> implements Fornecedor
                 long id = retorno.getLong(1);
                 return id;        
     }
-
+    
     @Override
     protected void carregaParametros(Fornecedor obj, PreparedStatement consulta) {
         
         try {
-            consulta.setString(1, obj.getCnpj().replace(".", "").replace("-", ""));
+            consulta.setString(1, obj.getCnpj().replace(".", "").replace("-", "").replace("/",""));
             consulta.setLong(2, buscarUltimo());
             consulta.setString(3, obj.getTelefone());
             consulta.setString(4, obj.getEmail());
@@ -86,13 +89,13 @@ public class FornecedorDAO extends DAOGenerico<Fornecedor> implements Fornecedor
         String sql = "";
         
         if(obj.getId() > 0)
-            sql = this.filtrarPor(sql, "id", Long.toString( obj.getId() ));
+            sql = this.filtrarPor(sql, "id", Long.toString( obj.getId()));
         
         if(obj.getNome() != null && !obj.getNome().isEmpty())
             sql = this.filtrarPor(sql, "nome", obj.getNome());
         
         if(obj.getCnpj()!= null && !obj.getCnpj().isEmpty())
-            sql = this.filtrarPor(sql, "cnpj", obj.getCnpj().replace(".", "").replace("-", ""));        
+            sql = this.filtrarPor(sql, "cnpj", obj.getCnpj().replace(".", "").replace("-", "").replace("/",""));        
         
         return sql;
     }
@@ -102,13 +105,12 @@ public class FornecedorDAO extends DAOGenerico<Fornecedor> implements Fornecedor
         try {
             Fornecedor obj = new Fornecedor();
             obj.setId(dados.getLong(1));
-            obj.setCnpj(dados.getString(2));
+            obj.setCnpj(dados.getString(2).replace(".", "").replace("-", "").replace("/",""));
             obj.setEndereco(endereco.Abrir(dados.getInt(3)));
             obj.setTelefone(dados.getString(4));
             obj.setEmail(dados.getString(5));
             obj.setNome(dados.getString(6));
-            obj.setEmail(dados.getString(7));
-            obj.setRepresentante(dados.getString(8));
+            obj.setRepresentante(dados.getString(7));
             
             
             return obj;
@@ -117,6 +119,38 @@ public class FornecedorDAO extends DAOGenerico<Fornecedor> implements Fornecedor
             Logger.getLogger(FornecedorDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+
+   public List<Fornecedor> BuscarPorNome () throws SQLException {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        List<Fornecedor> resultado = new ArrayList<>();
+
+        try {
+            //String sql = this.consultaBuscarNome();
+            stmt = BD.getConexao().prepareStatement("select * from fornecedores");
+            //stmt.setString(1, "%"+desc+"%");
+            
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+               Fornecedor fornecedor = new Fornecedor();
+
+                fornecedor.setId(rs.getInt("id"));
+                fornecedor.setNome(rs.getString("nome"));
+                fornecedor.setCnpj(rs.getString("cnpj"));
+                resultado.add(fornecedor);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FornecedorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+
+        return resultado;
+
     }
     
     
