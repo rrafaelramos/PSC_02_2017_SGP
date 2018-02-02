@@ -15,13 +15,14 @@ import java.util.Objects;
 public class ItemFinanceiro implements Entidade{
     long id;
     private BigDecimal precoVenda, precoCusto;
-    private String descricao, nome, categoria, fornecedor;
+    private String descricao, nome, categoria;
+    private Fornecedor fornecedor;
     private int estoque;
 
     public ItemFinanceiro() {
     }
 
-    public ItemFinanceiro(long id, BigDecimal precoVenda, BigDecimal precoCusto, String descricao, String nome, String categoria, int estoque, String fornecedor) {
+    public ItemFinanceiro(long id, BigDecimal precoVenda, BigDecimal precoCusto, String descricao, String nome, String categoria, int estoque, Fornecedor fornecedor) {
         this.id = id;
         this.precoVenda = precoVenda;
         this.precoCusto = precoCusto;
@@ -48,11 +49,11 @@ public class ItemFinanceiro implements Entidade{
         this.categoria = categoria;
     }
 
-    public String getFornecedor() {
+    public Fornecedor getFornecedor() {
         return fornecedor;
     }
 
-    public void setFornecedor(String fornecedor) {
+    public void setFornecedor(Fornecedor fornecedor) {
         this.fornecedor = fornecedor;
     }
 

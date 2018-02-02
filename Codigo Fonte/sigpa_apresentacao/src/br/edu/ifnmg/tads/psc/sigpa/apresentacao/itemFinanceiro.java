@@ -5,6 +5,7 @@
  */
 package br.edu.ifnmg.tads.psc.sigpa.apresentacao;
 
+import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Fornecedor;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.FornecedorRepositorio;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ItemFinanceiro;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ViolacaoRegraNegocioException;
@@ -284,7 +285,7 @@ private void preencherParametros() throws ViolacaoRegraNegocioException, ParseEx
     i.setPrecoVenda(new BigDecimal (txt_precoVenda.getText()));
     i.setEstoque(new Integer (txt_estoque.getText()));
     i.setCategoria((String) cb_categoria.getSelectedItem());
-    i.setFornecedor((String) cb_fornecedor.getSelectedItem());
+    i.setFornecedor((Fornecedor) cb_fornecedor.getSelectedItem());
     i.setNome(txt_nome.getText());
     }
 

@@ -20,6 +20,8 @@ import java.util.logging.Logger;
  */
 public class ItemFinanceiroDAO extends DAOGenerico<ItemFinanceiro> implements ItemFinanceiroRepositorio{
     
+    private FornecedorDAO fornecedor = new FornecedorDAO();
+    
     @Override
     protected String consultaAbrir() {
         return "select * from itemfinanceiro where id=?";
@@ -55,7 +57,7 @@ public class ItemFinanceiroDAO extends DAOGenerico<ItemFinanceiro> implements It
             consulta.setInt(4, obj.getEstoque());
             consulta.setString(5, obj.getDescricao());
             consulta.setString(6, obj.getCategoria());
-            consulta.setString(7, obj.getFornecedor());
+            consulta.setLong(7, obj.getFornecedor().getId());
         } catch (SQLException ex) {
             Logger.getLogger(ItemFinanceiroDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -88,7 +90,7 @@ public class ItemFinanceiroDAO extends DAOGenerico<ItemFinanceiro> implements It
             obj.setEstoque(dados.getInt(4));
             obj.setDescricao(dados.getString(5));
             obj.setCategoria(dados.getString(6));
-            obj.setFornecedor(dados.getString(7));
+            obj.setFornecedor(fornecedor.Abrir(dados.getInt(7)));
             
             return obj;
             
