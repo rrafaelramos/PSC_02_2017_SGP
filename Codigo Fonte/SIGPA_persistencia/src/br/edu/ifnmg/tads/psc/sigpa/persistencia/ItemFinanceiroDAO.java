@@ -73,8 +73,8 @@ public class ItemFinanceiroDAO extends DAOGenerico<ItemFinanceiro> implements It
         if(obj.getNome()!= null && !obj.getNome().isEmpty())
             sql = this.filtrarPor(sql, "nome", obj.getDescricao());
         
-        if(obj.getClass()!= null && !obj.getCategoria().isEmpty())
-            sql = this.filtrarPor(sql, "categoria", obj.getDescricao());
+        if(obj.getCategoria()!= null && !obj.getCategoria().isEmpty())
+            sql = this.filtrarPor(sql, "categoria", obj.getCategoria());
         
         return sql;
     }
@@ -87,10 +87,10 @@ public class ItemFinanceiroDAO extends DAOGenerico<ItemFinanceiro> implements It
             obj.setNome(dados.getString(2));
             obj.setPrecoVenda(dados.getBigDecimal(3));
             obj.setPrecoCusto(dados.getBigDecimal(4));
-            obj.setEstoque(dados.getInt(4));
-            obj.setDescricao(dados.getString(5));
-            obj.setCategoria(dados.getString(6));
-            obj.setFornecedor(fornecedor.Abrir(dados.getInt(7)));
+            obj.setEstoque(dados.getInt(5));
+            obj.setDescricao(dados.getString(6));
+            obj.setCategoria(dados.getString(7));
+            obj.setFornecedor(fornecedor.Abrir(dados.getInt(8)));
             
             return obj;
             

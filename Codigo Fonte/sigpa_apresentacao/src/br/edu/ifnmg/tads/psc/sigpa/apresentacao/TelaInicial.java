@@ -310,9 +310,9 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        BuscarCliente tela;
+        BuscarClientes tela;
         try {
-            tela =new BuscarCliente();
+            tela =new BuscarClientes();
             area.add(tela);
             tela.setVisible(true);
         } catch (ClassNotFoundException ex) {

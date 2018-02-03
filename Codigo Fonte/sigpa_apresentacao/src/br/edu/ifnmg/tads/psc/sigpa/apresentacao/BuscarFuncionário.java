@@ -5,70 +5,70 @@
  */
 package br.edu.ifnmg.tads.psc.sigpa.apresentacao;
 
-import br.edu.ifnmg.tads.psc.sigpa.aplicacao.CompraRepositorio;
-import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Fornecedor;
-import br.edu.ifnmg.tads.psc.sigpa.aplicacao.FornecedorRepositorio;
+import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Funcionario;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.FuncionarioRepositorio;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.RepositorioBuilder;
+import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ViolacaoRegraNegocioException;
 import java.util.List;
 import java.util.Vector;
-import javax.swing.JOptionPane;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Ananda Sá
  */
-public class BuscarFuncionário extends FormBuscar<Fornecedor> {
+public class BuscarFuncionário extends FormBuscar<Funcionario> {
     
     FuncionarioRepositorio funcionario;
     public BuscarFuncionário() throws ClassNotFoundException{
             initComponents();
-            setRepositorio(RepositorioBuilder.getFornecedorRepositorio());
+            setRepositorio(RepositorioBuilder.getFuncionarioRepositorio());
     }
     
 @Override
-    protected void preencherTabela(List<Fornecedor> resultado) {
+    protected void preencherTabela(List<Funcionario> resultado) {
         DefaultTableModel modelo = new DefaultTableModel();
             
         modelo.addColumn("ID");
-        modelo.addColumn("CNPJ");
-        modelo.addColumn("Cidade");
-        modelo.addColumn("Telefone");
         modelo.addColumn("Nome");
-        modelo.addColumn("Representante");
+        modelo.addColumn("CPF");
+        modelo.addColumn("Cargo");
+        
 
-        for(Fornecedor f : resultado){
+        for(Funcionario f : resultado){
             Vector valores = new Vector();
             valores.add(f.getId());
-            valores.add(f.getCnpj());
-            valores.add(f.getEndereco().getCidade());
-            valores.add(f.getTelefone());
             valores.add(f.getNome());
-            valores.add(f.getRepresentante());
-
+            valores.add(f.getCpf());
+            valores.add(f.getCargo());
             modelo.addRow(valores);
         }
 
-       // tabResultado.setModel(modelo);
+        tabResultado.setModel(modelo);
     }
     @Override
-    protected Fornecedor carregaFiltro() {
-        Fornecedor filtro = new Fornecedor();
+    protected Funcionario carregaFiltro() {
+        Funcionario filtro = new Funcionario();
         if(!txt_nome.getText().isEmpty()){
-            filtro.setNome(txt_nome.getText());
+            try {
+                filtro.setNome(txt_nome.getText());
+            } catch (ViolacaoRegraNegocioException ex) {
+                Logger.getLogger(BuscarFuncionário.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-      //  if(!txt_cnpj.getText().isEmpty()){
-        //    filtro.setCnpj(txt_cnpj.getText());
+      // if(!txt_cpf.getText().isEmpty()){
+        //    filtro.setCpf(txt_cpf.getText());
       //  }
         return filtro;
     }
 
     @Override
-    protected Fornecedor novaEntidade() {
-        return new Fornecedor();
+    protected Funcionario novaEntidade() {
+        return new Funcionario();
     }    /**
-     * Creates new form BuscarFornecedor
+     * Creates new form BuscarFuncionario
      */
     
 
@@ -86,8 +86,9 @@ public class BuscarFuncionário extends FormBuscar<Fornecedor> {
         txt_nome = new javax.swing.JTextField();
         btn_buscar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
         txt_cpf = new javax.swing.JFormattedTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabResultado = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
@@ -116,6 +117,16 @@ public class BuscarFuncionário extends FormBuscar<Fornecedor> {
             ex.printStackTrace();
         }
 
+        tabResultado.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nome", "CPF"
+            }
+        ));
+        jScrollPane1.setViewportView(tabResultado);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -124,7 +135,6 @@ public class BuscarFuncionário extends FormBuscar<Fornecedor> {
                 .addContainerGap()
                 .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,6 +149,8 @@ public class BuscarFuncionário extends FormBuscar<Fornecedor> {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,8 +170,11 @@ public class BuscarFuncionário extends FormBuscar<Fornecedor> {
                         .addComponent(btn_buscar)))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(357, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGap(0, 117, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
@@ -172,10 +187,11 @@ public class BuscarFuncionário extends FormBuscar<Fornecedor> {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_buscar;
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable tabResultado;
     private javax.swing.JFormattedTextField txt_cpf;
     private javax.swing.JTextField txt_nome;
     // End of variables declaration//GEN-END:variables

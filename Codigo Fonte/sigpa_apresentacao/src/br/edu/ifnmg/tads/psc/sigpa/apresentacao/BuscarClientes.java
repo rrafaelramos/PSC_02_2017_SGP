@@ -7,45 +7,42 @@ package br.edu.ifnmg.tads.psc.sigpa.apresentacao;
 
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Cliente;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ClienteRepositorio;
-import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Fornecedor;
-import br.edu.ifnmg.tads.psc.sigpa.aplicacao.FornecedorRepositorio;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.RepositorioBuilder;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ViolacaoRegraNegocioException;
 import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Jéssica Ramos
+ * @author Ananda Sá
  */
-public class BuscarCliente extends FormBuscar<Cliente> {
-
-    /**
-     *
-     * @throws java.lang.ClassNotFoundException
-     */
+public class BuscarClientes extends FormBuscar<Cliente> {
+    
     ClienteRepositorio cliente;
-    public BuscarCliente() throws ClassNotFoundException{
+    public BuscarClientes() throws ClassNotFoundException{
             initComponents();
             setRepositorio(RepositorioBuilder.getClienteRepositorio());
     }
     
+@Override
     protected void preencherTabela(List<Cliente> resultado) {
         DefaultTableModel modelo = new DefaultTableModel();
             
         modelo.addColumn("ID");
         modelo.addColumn("Nome");
         modelo.addColumn("CPF");
+        modelo.addColumn("Telefone");
+        
 
         for(Cliente f : resultado){
             Vector valores = new Vector();
             valores.add(f.getId());
             valores.add(f.getNome());
-            //valores.add(f.getCpf());
+            valores.add(f.getCpf());
+            valores.add(f.getTelefone());
             modelo.addRow(valores);
         }
 
@@ -53,24 +50,25 @@ public class BuscarCliente extends FormBuscar<Cliente> {
     }
     @Override
     protected Cliente carregaFiltro() {
-        try {
-            Cliente filtro = new Cliente();
-            
-            if(!txt_nome.getText().isEmpty())
+        Cliente filtro = new Cliente();
+        if(!txt_nome.getText().isEmpty()){
+            try {
                 filtro.setNome(txt_nome.getText());
-            //if(txt_cpf.getText()!= null)
-             // filtro.setCpf(txt_cpf.getText());
-            return filtro;
-        } catch (ViolacaoRegraNegocioException ex) {
-            Logger.getLogger(BuscarCliente.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ViolacaoRegraNegocioException ex) {
+                Logger.getLogger(BuscarClientes.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        return null;
+      // if(!txt_cpf.getText().isEmpty()){
+        //    filtro.setCpf(txt_cpf.getText());
+      //  }
+        return filtro;
     }
 
+    @Override
     protected Cliente novaEntidade() {
         return new Cliente();
     }    /**
-     * Creates new form BuscarFornecedor
+     * Creates new form BuscarCliente
      */
     
 
@@ -88,21 +86,21 @@ public class BuscarCliente extends FormBuscar<Cliente> {
         txt_nome = new javax.swing.JTextField();
         btn_buscar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        txt_cpf = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabResultado = new javax.swing.JTable();
-        txt_cpf = new javax.swing.JFormattedTextField();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Buscar Fornecedor");
+        setTitle("Buscar Clientes");
 
         jLabel1.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         jLabel1.setText("CPF");
 
         jLabel3.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        jLabel3.setText("Nome:");
+        jLabel3.setText("Nome");
 
         btn_buscar.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
         btn_buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/tads/psc/sigpa/apresentacao/research(1).png"))); // NOI18N
@@ -113,6 +111,12 @@ public class BuscarCliente extends FormBuscar<Cliente> {
             }
         });
 
+        try {
+            txt_cpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         tabResultado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -122,12 +126,6 @@ public class BuscarCliente extends FormBuscar<Cliente> {
             }
         ));
         jScrollPane1.setViewportView(tabResultado);
-
-        try {
-            txt_cpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -143,38 +141,40 @@ public class BuscarCliente extends FormBuscar<Cliente> {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1)
-                            .addComponent(txt_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btn_buscar)
-                        .addGap(27, 27, 27)))
+                            .addComponent(txt_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(btn_buscar)))
+                .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(357, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGap(0, 117, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();

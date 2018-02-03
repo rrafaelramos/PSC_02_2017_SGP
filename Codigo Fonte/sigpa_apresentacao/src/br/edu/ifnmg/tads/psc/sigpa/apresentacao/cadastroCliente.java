@@ -54,7 +54,6 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         txt_rg = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txt_cpf = new javax.swing.JFormattedTextField();
         txt_data_nascimento = new javax.swing.JFormattedTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -82,6 +81,7 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
         txt_cep = new javax.swing.JFormattedTextField();
         txt_limit = new javax.swing.JTextField();
         btn_novo1 = new javax.swing.JButton();
+        txt_cpf = new javax.swing.JFormattedTextField();
 
         setClosable(true);
         setMaximizable(true);
@@ -100,12 +100,6 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
 
         jLabel3.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         jLabel3.setText("CPF");
-
-        try {
-            txt_cpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
 
         try {
             txt_data_nascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -197,6 +191,12 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
             }
         });
 
+        try {
+            txt_cpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -277,8 +277,8 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(151, Short.MAX_VALUE))
+                        .addComponent(txt_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
