@@ -34,25 +34,20 @@ public class BuscarFornecedor extends FormBuscar<Fornecedor> {
         DefaultTableModel modelo = new DefaultTableModel();
             
         modelo.addColumn("ID");
-        modelo.addColumn("CNPJ");
-        modelo.addColumn("Cidade");
-        modelo.addColumn("Telefone");
         modelo.addColumn("Nome");
-        modelo.addColumn("Representante");
+        modelo.addColumn("CNPJ");
+        
 
         for(Fornecedor f : resultado){
             Vector valores = new Vector();
             valores.add(f.getId());
-            valores.add(f.getCnpj());
-            valores.add(f.getEndereco().getCidade());
-            valores.add(f.getTelefone());
             valores.add(f.getNome());
-            valores.add(f.getRepresentante());
-
+            valores.add(f.getCnpj());
+            
             modelo.addRow(valores);
         }
 
-       // tabResultado.setModel(modelo);
+       tabResultado.setModel(modelo);
     }
     @Override
     protected Fornecedor carregaFiltro() {
@@ -89,7 +84,8 @@ public class BuscarFornecedor extends FormBuscar<Fornecedor> {
         txt_nome = new javax.swing.JTextField();
         btn_buscar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabResultado = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
@@ -112,15 +108,20 @@ public class BuscarFornecedor extends FormBuscar<Fornecedor> {
             }
         });
 
+        tabResultado.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nome", "CNPJ"
+            }
+        ));
+        jScrollPane1.setViewportView(tabResultado);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -135,6 +136,15 @@ public class BuscarFornecedor extends FormBuscar<Fornecedor> {
                 .addGap(45, 45, 45)
                 .addComponent(btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane1)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,8 +164,12 @@ public class BuscarFornecedor extends FormBuscar<Fornecedor> {
                         .addComponent(btn_buscar)))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(449, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(130, 130, 130)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(75, Short.MAX_VALUE)))
         );
 
         pack();
@@ -168,10 +182,11 @@ public class BuscarFornecedor extends FormBuscar<Fornecedor> {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_buscar;
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable tabResultado;
     private javax.swing.JTextField txt_cnpj;
     private javax.swing.JTextField txt_nome;
     // End of variables declaration//GEN-END:variables

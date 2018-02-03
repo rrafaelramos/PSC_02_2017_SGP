@@ -5,11 +5,16 @@
  */
 package br.edu.ifnmg.tads.psc.sigpa.apresentacao;
 
+import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Cliente;
+import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ClienteRepositorio;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Fornecedor;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.FornecedorRepositorio;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.RepositorioBuilder;
+import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ViolacaoRegraNegocioException;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,58 +22,53 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Jéssica Ramos
  */
-public class BuscarCliente extends FormBuscar<Fornecedor> {
+public class BuscarCliente extends FormBuscar<Cliente> {
 
     /**
      *
      * @throws java.lang.ClassNotFoundException
      */
-    FornecedorRepositorio fornecedor;
+    ClienteRepositorio cliente;
     public BuscarCliente() throws ClassNotFoundException{
             initComponents();
-            setRepositorio(RepositorioBuilder.getFornecedorRepositorio());
+            setRepositorio(RepositorioBuilder.getClienteRepositorio());
     }
     
-@Override
-    protected void preencherTabela(List<Fornecedor> resultado) {
+    protected void preencherTabela(List<Cliente> resultado) {
         DefaultTableModel modelo = new DefaultTableModel();
             
         modelo.addColumn("ID");
-        modelo.addColumn("CNPJ");
-        modelo.addColumn("Cidade");
-        modelo.addColumn("Telefone");
         modelo.addColumn("Nome");
-        modelo.addColumn("Representante");
+        modelo.addColumn("CPF");
 
-        for(Fornecedor f : resultado){
+        for(Cliente f : resultado){
             Vector valores = new Vector();
             valores.add(f.getId());
-            valores.add(f.getCnpj());
-            valores.add(f.getEndereco().getCidade());
-            valores.add(f.getTelefone());
             valores.add(f.getNome());
-            valores.add(f.getRepresentante());
-
+            //valores.add(f.getCpf());
             modelo.addRow(valores);
         }
 
-       // tabResultado.setModel(modelo);
+        tabResultado.setModel(modelo);
     }
     @Override
-    protected Fornecedor carregaFiltro() {
-        Fornecedor filtro = new Fornecedor();
-        if(!txt_nome.getText().isEmpty()){
-            filtro.setNome(txt_nome.getText());
+    protected Cliente carregaFiltro() {
+        try {
+            Cliente filtro = new Cliente();
+            
+            if(!txt_nome.getText().isEmpty())
+                filtro.setNome(txt_nome.getText());
+            //if(txt_cpf.getText()!= null)
+             // filtro.setCpf(txt_cpf.getText());
+            return filtro;
+        } catch (ViolacaoRegraNegocioException ex) {
+            Logger.getLogger(BuscarCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(!txt_cnpj.getText().isEmpty()){
-            filtro.setCnpj(txt_cnpj.getText());
-        }
-        return filtro;
+        return null;
     }
 
-    @Override
-    protected Fornecedor novaEntidade() {
-        return new Fornecedor();
+    protected Cliente novaEntidade() {
+        return new Cliente();
     }    /**
      * Creates new form BuscarFornecedor
      */
@@ -84,12 +84,13 @@ public class BuscarCliente extends FormBuscar<Fornecedor> {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        txt_cnpj = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txt_nome = new javax.swing.JTextField();
         btn_buscar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabResultado = new javax.swing.JTable();
+        txt_cpf = new javax.swing.JFormattedTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -98,7 +99,7 @@ public class BuscarCliente extends FormBuscar<Fornecedor> {
         setTitle("Buscar Fornecedor");
 
         jLabel1.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        jLabel1.setText("CNPJ:");
+        jLabel1.setText("CPF");
 
         jLabel3.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         jLabel3.setText("Nome:");
@@ -112,6 +113,22 @@ public class BuscarCliente extends FormBuscar<Fornecedor> {
             }
         });
 
+        tabResultado.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nome", "CPF"
+            }
+        ));
+        jScrollPane1.setViewportView(tabResultado);
+
+        try {
+            txt_cpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,42 +137,44 @@ public class BuscarCliente extends FormBuscar<Fornecedor> {
                 .addContainerGap()
                 .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_cnpj))
+                        .addComponent(txt_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(45, 45, 45)
+                        .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(txt_cnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(btn_buscar)))
-                .addGap(18, 18, 18)
+                            .addComponent(txt_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btn_buscar)
+                        .addGap(27, 27, 27)))
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -168,11 +187,12 @@ public class BuscarCliente extends FormBuscar<Fornecedor> {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_buscar;
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField txt_cnpj;
+    private javax.swing.JTable tabResultado;
+    private javax.swing.JFormattedTextField txt_cpf;
     private javax.swing.JTextField txt_nome;
     // End of variables declaration//GEN-END:variables
 

@@ -60,9 +60,9 @@ public class Pessoa implements Entidade{
 
     public void setCpf(String cpf) throws ViolacaoRegraNegocioException {
         Matcher verificador = regex_cpf.matcher(cpf);
-        //if(cpf == null || cpf.isEmpty() || ! verificador.matches())
-        //    throw new ViolacaoRegraNegocioException("O CPF deve estar no formato ###.###.###-##!");
-        //this.cpf = cpf.replace(".", "").replace("-", "");
+        if(cpf == null || cpf.isEmpty() || ! verificador.matches())
+            throw new ViolacaoRegraNegocioException("O CPF deve estar no formato ###.###.###-##!");
+        this.cpf = cpf.replace(".", "").replace("-", "");
     }
 
     public String getRg() {
