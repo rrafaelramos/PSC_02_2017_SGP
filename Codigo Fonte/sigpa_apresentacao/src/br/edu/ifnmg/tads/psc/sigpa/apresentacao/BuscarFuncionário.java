@@ -21,10 +21,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class BuscarFuncionário extends FormBuscar<Funcionario> {
     
-    FuncionarioRepositorio funcionario;
+    FuncionarioRepositorio funcionario = RepositorioBuilder.getFuncionarioRepositorio();
     public BuscarFuncionário() throws ClassNotFoundException{
             initComponents();
             setRepositorio(RepositorioBuilder.getFuncionarioRepositorio());
+             List<Funcionario> busca = funcionario.Buscar(null);
+             preencherTabela(busca);
     }
     
 @Override
@@ -58,9 +60,13 @@ public class BuscarFuncionário extends FormBuscar<Funcionario> {
                 Logger.getLogger(BuscarFuncionário.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-      // if(!txt_cpf.getText().isEmpty()){
-        //    filtro.setCpf(txt_cpf.getText());
-      //  }
+      /* if(!txt_cpf.getText().isEmpty()){
+            try {
+                filtro.setCpf(txt_cpf.getText());
+            } catch (ViolacaoRegraNegocioException ex) {
+                Logger.getLogger(BuscarFuncionário.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }*/
         return filtro;
     }
 
@@ -81,12 +87,10 @@ public class BuscarFuncionário extends FormBuscar<Funcionario> {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txt_nome = new javax.swing.JTextField();
         btn_buscar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        txt_cpf = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabResultado = new javax.swing.JTable();
 
@@ -95,9 +99,6 @@ public class BuscarFuncionário extends FormBuscar<Funcionario> {
         setMaximizable(true);
         setResizable(true);
         setTitle("Buscar Funcionário");
-
-        jLabel1.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        jLabel1.setText("CPF");
 
         jLabel3.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         jLabel3.setText("Nome");
@@ -110,12 +111,6 @@ public class BuscarFuncionário extends FormBuscar<Funcionario> {
                 btn_buscarActionPerformed(evt);
             }
         });
-
-        try {
-            txt_cpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
 
         tabResultado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -137,44 +132,30 @@ public class BuscarFuncionário extends FormBuscar<Funcionario> {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txt_nome)
+                .addGap(18, 18, 18)
                 .addComponent(btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(43, 43, 43))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(txt_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(btn_buscar)))
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_buscar))
+                .addGap(42, 42, 42)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(357, Short.MAX_VALUE))
+                .addContainerGap(360, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 117, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(0, 88, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
@@ -187,12 +168,10 @@ public class BuscarFuncionário extends FormBuscar<Funcionario> {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_buscar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable tabResultado;
-    private javax.swing.JFormattedTextField txt_cpf;
     private javax.swing.JTextField txt_nome;
     // End of variables declaration//GEN-END:variables
 

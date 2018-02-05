@@ -31,6 +31,7 @@ public class TelaInicial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem11 = new javax.swing.JMenuItem();
         area = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -52,6 +53,8 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu9 = new javax.swing.JMenu();
+
+        jMenuItem11.setText("jMenuItem11");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setExtendedState(6);
@@ -177,6 +180,11 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/tads/psc/sigpa/apresentacao/money-bag.png"))); // NOI18N
         jMenu9.setText("Venda");
         jMenu9.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        jMenu9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu9MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu9);
 
         setJMenuBar(jMenuBar1);
@@ -321,6 +329,18 @@ public class TelaInicial extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
+    private void jMenu9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu9MouseClicked
+        VendaEditar tela;
+        try {
+            tela =new VendaEditar();
+            area.add(tela);
+            tela.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jMenu9MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -370,6 +390,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

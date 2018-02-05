@@ -71,11 +71,9 @@ public class ItemFinanceiroDAO extends DAOGenerico<ItemFinanceiro> implements It
             sql = this.filtrarPor(sql, "id", Long.toString( obj.getId() ));
         
         if(obj.getNome()!= null && !obj.getNome().isEmpty())
-            sql = this.filtrarPor(sql, "nome", obj.getDescricao());
+            sql = this.filtrarPor(sql, "nome", obj.getNome());
         
-        if(obj.getCategoria()!= null && !obj.getCategoria().isEmpty())
-            sql = this.filtrarPor(sql, "categoria", obj.getCategoria());
-        
+       
         return sql;
     }
 

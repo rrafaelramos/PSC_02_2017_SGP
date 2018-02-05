@@ -23,10 +23,12 @@ public class BuscarFornecedor extends FormBuscar<Fornecedor> {
      *
      * @throws java.lang.ClassNotFoundException
      */
-    FornecedorRepositorio fornecedor;
+    FornecedorRepositorio fornecedor = RepositorioBuilder.getFornecedorRepositorio();
     public BuscarFornecedor() throws ClassNotFoundException{
             initComponents();
             setRepositorio(RepositorioBuilder.getFornecedorRepositorio());
+            List<Fornecedor> busca = fornecedor.Buscar(null);
+             preencherTabela(busca);
     }
     
 @Override
@@ -116,6 +118,11 @@ public class BuscarFornecedor extends FormBuscar<Fornecedor> {
                 "ID", "Nome", "CNPJ"
             }
         ));
+        tabResultado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabResultadoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabResultado);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -178,6 +185,10 @@ public class BuscarFornecedor extends FormBuscar<Fornecedor> {
     private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
         buscar();
     }//GEN-LAST:event_btn_buscarActionPerformed
+
+    private void tabResultadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabResultadoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tabResultadoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

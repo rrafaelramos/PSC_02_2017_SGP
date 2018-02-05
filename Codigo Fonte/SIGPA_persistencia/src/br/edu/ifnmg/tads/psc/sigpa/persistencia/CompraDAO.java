@@ -69,7 +69,7 @@ public class CompraDAO extends DAOGenerico<Compra> implements CompraRepositorio 
         if(obj.getId() > 0)
             sql = this.filtrarPor(sql, "id", Long.toString( obj.getId()));
         
-        if(obj.getDescricao()!= null && !obj.getDescricao().isEmpty())
+       if(obj.getDescricao()!= null && !obj.getDescricao().isEmpty())
             sql = this.filtrarPor(sql, "descricao", obj.getDescricao());        
         
         return sql;

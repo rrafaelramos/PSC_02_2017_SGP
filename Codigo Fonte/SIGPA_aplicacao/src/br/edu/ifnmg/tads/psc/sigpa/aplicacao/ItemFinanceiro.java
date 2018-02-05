@@ -101,8 +101,10 @@ public class ItemFinanceiro implements Entidade{
 
     @Override
     public String toString() {
-        return "ItemFinanceiro{" + "precoVenda=" + precoVenda + ", descricao=" + descricao + '}';
+        return nome;
     }
+
+    
    
 
     @Override

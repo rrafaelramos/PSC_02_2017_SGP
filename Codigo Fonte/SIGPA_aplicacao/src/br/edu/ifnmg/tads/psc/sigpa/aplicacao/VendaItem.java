@@ -10,7 +10,7 @@ import java.util.Objects;
 
 /**
  *
- * @author petronio
+ * @author ananda
  */
 public class VendaItem implements Entidade {
     private long id;
@@ -58,6 +58,7 @@ public class VendaItem implements Entidade {
             valorUnitario = item.getPrecoVenda();
     }
 
+    
     public int getQuantidade() {
         return quantidade;
     }

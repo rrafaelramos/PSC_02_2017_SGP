@@ -10,6 +10,7 @@ import java.util.List;
 /**
  *
  * @author petronio
+ * @param <T>
  */
 public interface Repositorio<T> {
     boolean Salvar(T obj);

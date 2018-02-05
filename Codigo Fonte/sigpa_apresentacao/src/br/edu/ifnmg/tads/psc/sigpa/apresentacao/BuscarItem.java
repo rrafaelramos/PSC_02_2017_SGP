@@ -18,10 +18,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class BuscarItem extends FormBuscar<ItemFinanceiro> {
     
-    ItemFinanceiroRepositorio item;
+    ItemFinanceiroRepositorio item = RepositorioBuilder.getItemFinanceiroRepositorio();
     public BuscarItem() throws ClassNotFoundException{
             initComponents();
             setRepositorio(RepositorioBuilder.getItemFinanceiroRepositorio());
+             List<ItemFinanceiro> busca = item.Buscar(null);
+             preencherTabela(busca);
     }
     
 @Override

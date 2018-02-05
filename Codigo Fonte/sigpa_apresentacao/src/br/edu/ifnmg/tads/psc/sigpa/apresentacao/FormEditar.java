@@ -11,10 +11,6 @@ import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Repositorio;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ViolacaoRegraNegocioException;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author petronio
- */
 public abstract class FormEditar<T extends Entidade> extends javax.swing.JInternalFrame{
     
     private FormBuscar buscar;

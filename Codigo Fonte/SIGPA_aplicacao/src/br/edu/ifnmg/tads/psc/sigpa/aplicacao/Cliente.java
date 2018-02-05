@@ -11,10 +11,7 @@ import java.util.Objects;
 
 public class Cliente extends Pessoa implements Entidade{
     private BigDecimal limite;
-    
-  
-   
-    
+       
     public Cliente(long id, String cpf, String rg, String nome, String email, String telefone, Sexo sexo, Date nascimento, Endereco endereco) {
         super(id, cpf, rg, nome, email, telefone, sexo, nascimento, endereco);
     }
@@ -38,11 +35,14 @@ public class Cliente extends Pessoa implements Entidade{
         }
         this.limite = limite;
     }*/
+    
 
     @Override
     public String toString() {
-        return "Cliente{" + "limite=" + limite + '}';
+        return nome ;
     }
+
+   
 
 
     @Override

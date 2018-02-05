@@ -17,7 +17,10 @@ import java.util.regex.Pattern;
 public class Pessoa implements Entidade{
     private long id;
     private static Pattern regex_cpf = Pattern.compile("^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$");
-    private String cpf, rg, nome, email, telefone;
+    String cpf;
+    String rg;
+    String nome;
+    private String email, telefone;
     private Sexo sexo;
     private Date nascimento;
     private Endereco endereco;

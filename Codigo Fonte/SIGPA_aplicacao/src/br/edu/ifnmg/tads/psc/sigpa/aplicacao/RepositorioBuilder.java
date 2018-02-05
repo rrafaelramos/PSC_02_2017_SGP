@@ -177,6 +177,25 @@ public class RepositorioBuilder {
         return compra;
     }
     
+    private static VendaRepositorio venda;
+    
+    public static VendaRepositorio getVendaRepositorio() throws ClassNotFoundException{
+        if(venda == null){
+                
+                // Carrega a classe
+                Class obj = Class.forName(prop.getProperty("VendaRepositorio"));
+                
+            try {
+                // Cria uma nova instância da classe
+                venda = (VendaRepositorio)obj.newInstance();
+            } catch (InstantiationException | IllegalAccessException ex) {
+                Logger.getLogger(RepositorioBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                         
+        }
+        return venda;
+    }
+    
     
     
    /* private static ProdutoRepositorio produto;

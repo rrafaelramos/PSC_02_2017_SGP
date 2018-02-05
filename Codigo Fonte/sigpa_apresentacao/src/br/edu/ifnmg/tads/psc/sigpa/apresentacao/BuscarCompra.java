@@ -23,10 +23,12 @@ public class BuscarCompra extends FormBuscar<Compra> {
      *
      * @throws java.lang.ClassNotFoundException
      */
-    CompraRepositorio compra;
+    CompraRepositorio compra = RepositorioBuilder.getCompraRepositorio();
     public BuscarCompra() throws ClassNotFoundException{
             initComponents();
             setRepositorio(RepositorioBuilder.getCompraRepositorio());
+             List<Compra> busca = compra.Buscar(null);
+             preencherTabela(busca);
     }
     
 @Override

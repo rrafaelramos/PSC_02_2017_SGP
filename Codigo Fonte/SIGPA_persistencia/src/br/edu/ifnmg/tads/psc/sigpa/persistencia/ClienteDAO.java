@@ -7,10 +7,8 @@ package br.edu.ifnmg.tads.psc.sigpa.persistencia;
 
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Cliente;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ClienteRepositorio;
-import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Endereco;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Sexo;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ViolacaoRegraNegocioException;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -63,8 +63,8 @@ public class ContasPagarDAO extends DAOGenerico<ContasPagar> implements ContasPa
         if(obj.getId() > 0)
             sql = this.filtrarPor(sql, "id", Long.toString( obj.getId() ));
         
-        if(obj.getDescricao()!= null && !obj.getDescricao().isEmpty())
-            sql = this.filtrarPor(sql, "descricao", obj.getDescricao());
+       // if(obj.getDescricao()!= null && !obj.getDescricao().isEmpty())
+           // sql = this.filtrarPor(sql, "descricao", obj.getDescricao());
         
         return sql;
     }
