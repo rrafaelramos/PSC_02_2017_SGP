@@ -8,7 +8,6 @@ package br.edu.ifnmg.tads.psc.sigpa.apresentacao;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Cliente;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ClienteRepositorio;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.RepositorioBuilder;
-import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Sexo;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ViolacaoRegraNegocioException;
 import java.util.List;
 import java.util.Vector;

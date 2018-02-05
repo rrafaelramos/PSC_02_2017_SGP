@@ -96,7 +96,7 @@ public class VendaDAO extends DAOGenerico<Venda> implements VendaRepositorio {
         try {
             // Utilizando a conexão aberta, cria um Statement (comando)
             PreparedStatement consulta = BD.getConexao().prepareStatement(
-                    "select id, venda, produto, quantidade, valorunitario from vendasitens where venda = ?");
+                    "select id, venda_fk, item_fk, quantidade, valorunitario from itemvenda where venda = ?");
 
             // Coloca o parâmetro da consulta (id)
             consulta.setLong(1, obj.getId());
@@ -183,7 +183,7 @@ public class VendaDAO extends DAOGenerico<Venda> implements VendaRepositorio {
             
             
             try {
-                String sql = "insert into itemvenda(venda, produto, quantidade, valorunitario) values(?,?,?,?)";
+                String sql = "insert into itemvenda(venda_fk, item_fk, quantidade, valorunitario) values(?,?,?,?)";
 
                 for (VendaItem i : obj.getItens()) {
 

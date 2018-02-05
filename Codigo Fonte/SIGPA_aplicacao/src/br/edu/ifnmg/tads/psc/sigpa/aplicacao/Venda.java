@@ -26,7 +26,13 @@ public class Venda implements Entidade{
         valorVenda = new BigDecimal("0.00");
     }
 
-   
+    public Venda(long id, Date data, Cliente cliente, BigDecimal valorVenda, List<VendaItem> itens) {
+        this.id = id;
+        this.data = data;
+        this.cliente = cliente;
+        this.valorVenda = valorVenda;
+        this.itens = itens;
+    }
 
     
 

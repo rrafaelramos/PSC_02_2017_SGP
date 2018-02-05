@@ -25,7 +25,7 @@
             </Property>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="jMenu4">
+            <Menu class="javax.swing.JMenu" name="jMAdm">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Administrador"/>
               </Properties>
@@ -124,7 +124,7 @@
                 </Menu>
               </SubComponents>
             </Menu>
-            <Menu class="javax.swing.JMenu" name="jMenu3">
+            <Menu class="javax.swing.JMenu" name="jMVendedor">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Vendedor"/>
               </Properties>
