@@ -629,12 +629,16 @@ public class cadastroFuncionario extends javax.swing.JInternalFrame {
     }
 
     private void salvar() {
-        
-        if (endereco.Salvar(e) && (funcionarios.Salvar(f))){
-            JOptionPane.showMessageDialog(rootPane, "Funcionario cadastrado com sucesso!");
-        } else{
-            
-            JOptionPane.showMessageDialog(rootPane, "NÃO FOI POSSIVEL FAZER O CADASTRO!");
+        if(JOptionPane.showConfirmDialog(this, "Deseja realmente salvar os dados?","Confirmação",
+                    JOptionPane.YES_NO_OPTION) == 0) {
+            if (endereco.Salvar(e) && (funcionarios.Salvar(f))){
+                JOptionPane.showMessageDialog(rootPane, "Funcionario cadastrado com sucesso!");
+            } else{
+
+                JOptionPane.showMessageDialog(rootPane, "NÃO FOI POSSIVEL FAZER O CADASTRO!");
+            }
+        }else{ 
+            JOptionPane.showMessageDialog(rootPane, "Cadastro cancelado pelo usuário!");
         }
     }
 }

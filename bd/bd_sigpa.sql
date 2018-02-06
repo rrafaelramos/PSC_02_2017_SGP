@@ -20,7 +20,7 @@ create table endereco (
 -- select * from endereco;
 -- select * from funcionarios;
 -- select * from clientes;
-select * from itemfinanceiro;
+-- select * from itemfinanceiro;
 
 create table funcionarios (
 	id int auto_increment not null,
@@ -40,14 +40,13 @@ create table funcionarios (
     tipo int not null,
     primary key (id),
     foreign key (endereco_fk) references endereco(id)
-
 );
 
 
 create table clientes (
 	id int auto_increment not null,
     nome varchar(50) not null,
-    cpf varchar (11) not null,
+    cpf varchar (11) not null unique,
     rg varchar (20) not null,
     nascimento date not null,
     sexo char not null,
@@ -75,7 +74,7 @@ create table fornecedores (
 
 );
 
-drop table itemfinanceiro;
+-- drop table itemfinanceiro;
 
 create table itemfinanceiro (
 	id int auto_increment not null,
@@ -106,7 +105,7 @@ create table venda (
 	id int auto_increment not null,
     datavenda date not null,
     cliente_fk int not null,
-	valorvenda float not null,
+    valorvenda float not null,
     primary key (id),
     foreign key (cliente_fk) references clientes (id)
 );
@@ -119,14 +118,14 @@ create table contasapagar (
     primary key (id)
 );
 
- drop table itemvenda;
+-- drop table itemvenda;
 create table itemvenda (
 	id int auto_increment,
     venda_fk int not null,
     itemfinanceiro_fk int not null,
     quantidade int not null,
     primary key (id),
+	valorunitario float,
     foreign key (venda_fk) references venda (id),
     foreign key (itemfinanceiro_fk) references itemfinanceiro (id)
-
 );

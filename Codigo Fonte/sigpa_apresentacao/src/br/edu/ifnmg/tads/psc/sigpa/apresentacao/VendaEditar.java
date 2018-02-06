@@ -75,7 +75,6 @@ public class VendaEditar extends FormEditar<Venda> {
         spnQuantidade = new javax.swing.JSpinner();
         btnAdicionar = new javax.swing.JButton();
         btnRemover = new javax.swing.JButton();
-        btn_add = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         btnApagar = new javax.swing.JButton();
@@ -179,13 +178,6 @@ public class VendaEditar extends FormEditar<Venda> {
 
         btnRemover.setText("Remover");
 
-        btn_add.setText("ADD");
-        btn_add.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_addActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -202,11 +194,9 @@ public class VendaEditar extends FormEditar<Venda> {
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(spnQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 19, Short.MAX_VALUE))
+                        .addGap(0, 29, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnAdicionar)
-                        .addGap(47, 47, 47)
-                        .addComponent(btn_add)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnRemover)))
                 .addContainerGap())
@@ -222,18 +212,16 @@ public class VendaEditar extends FormEditar<Venda> {
                             .addComponent(cbxProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(16, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(spnQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
                         .addGap(18, 18, 18)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnAdicionar)
-                        .addComponent(btnRemover))
-                    .addComponent(btn_add))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdicionar)
+                    .addComponent(btnRemover))
                 .addGap(24, 24, 24))
         );
 
@@ -333,18 +321,7 @@ public class VendaEditar extends FormEditar<Venda> {
         entidade.addItem(item);
         
         carregaCampos();
-        
     }//GEN-LAST:event_btnAdicionarActionPerformed
-
-    private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
-        VendaItem item = new VendaItem();
-        item.setItem((ItemFinanceiro)cbxProdutos.getSelectedItem());
-        item.setQuantidade(Integer.parseInt(spnQuantidade.getValue().toString()));
-        
-        entidade.addItem(item);
-        
-        carregaCampos();
-    }//GEN-LAST:event_btn_addActionPerformed
 
     @Override
     protected void carregaObjeto() throws ViolacaoRegraNegocioException {
@@ -373,7 +350,6 @@ public class VendaEditar extends FormEditar<Venda> {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnRemover;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JButton btn_add;
     private javax.swing.JComboBox<String> cbxClientes;
     private javax.swing.JComboBox<String> cbxProdutos;
     private javax.swing.JLabel jLabel1;

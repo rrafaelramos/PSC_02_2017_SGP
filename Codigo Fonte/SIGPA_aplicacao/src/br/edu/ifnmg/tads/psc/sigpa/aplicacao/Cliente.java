@@ -27,23 +27,10 @@ public class Cliente extends Pessoa implements Entidade{
         return limite;
     }
 
-    /* como comparar big deciaml
-    public void setLimite(BigDecimal limite) throws ViolacaoRegraNegocioException{
-        if (limite <0) {
-        } else {
-            throw new ViolacaoRegraNegocioException("O limite não pode ser menor Que '0' (Zero)");
-        }
-        this.limite = limite;
-    }*/
-    
-
     @Override
     public String toString() {
         return nome ;
     }
-
-   
-
 
     @Override
     public boolean equals(Object obj) {

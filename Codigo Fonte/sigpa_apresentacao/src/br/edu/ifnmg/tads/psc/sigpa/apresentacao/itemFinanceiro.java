@@ -290,12 +290,17 @@ private void preencherParametros() throws ViolacaoRegraNegocioException, ParseEx
     }
 
      private void salvar(){
-        if ((item.Salvar(i))){
+     if(JOptionPane.showConfirmDialog(this, "Deseja realmente salvar os dados?","Confirmação",
+                JOptionPane.YES_NO_OPTION) == 0) {
+         if ((item.Salvar(i))){
             JOptionPane.showMessageDialog(rootPane, "Item cadastrado com sucesso!");
         } else{
             
             JOptionPane.showMessageDialog(rootPane, "NÃO FOI POSSIVEL FAZER O CADASTRO!");
         }
+        }else { 
+            JOptionPane.showMessageDialog(rootPane, "Cancelado pelo usuário!");
+     }
      }
 
 private void limparCampos(){

@@ -43,7 +43,7 @@ public class VendaDAO extends DAOGenerico<Venda> implements VendaRepositorio {
 
     @Override
     protected String consultaInsert() {
-        return "insert into venda(datavenda, cliente_fk, valorvenda ) values(?,?,?)";
+        return "insert into venda(datavenda, cliente_fk, valorvenda) values(?,?,?)";
     }
 
     @Override
@@ -64,8 +64,8 @@ public class VendaDAO extends DAOGenerico<Venda> implements VendaRepositorio {
     @Override
     protected void carregaParametros(Venda obj, PreparedStatement consulta) {
         try {
-            consulta.setLong(1, obj.getCliente().getId());
-            consulta.setDate(2, new Date(obj.getData().getTime()));
+            consulta.setDate(1, new Date(obj.getData().getTime()));
+            consulta.setLong(2, obj.getCliente().getId());
             consulta.setBigDecimal(3, obj.getValorVenda());
         } catch (SQLException ex) {
             Logger.getLogger(VendaDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -78,8 +78,8 @@ public class VendaDAO extends DAOGenerico<Venda> implements VendaRepositorio {
 
             Venda obj = new Venda();
             obj.setId(dados.getLong(1));
-            obj.setCliente(clientes.Abrir(dados.getLong(2)));
-            obj.setData(new java.util.Date(dados.getDate(3).getTime()));
+            obj.setData(new java.util.Date(dados.getDate(2).getTime()));
+            obj.setCliente(clientes.Abrir(dados.getLong(3)));
             obj.setValorVenda(dados.getBigDecimal(4));
 
             obj.setItens(AbrirItens(obj));
@@ -96,7 +96,7 @@ public class VendaDAO extends DAOGenerico<Venda> implements VendaRepositorio {
         try {
             // Utilizando a conexão aberta, cria um Statement (comando)
             PreparedStatement consulta = BD.getConexao().prepareStatement(
-                    "select id, venda_fk, item_fk, quantidade, valorunitario from itemvenda where venda = ?");
+                    "select id, venda_fk, itemfinanceiro_fk, quantidade, valorunitario from itemvenda where venda = ?");
 
             // Coloca o parâmetro da consulta (id)
             consulta.setLong(1, obj.getId());
@@ -143,7 +143,7 @@ public class VendaDAO extends DAOGenerico<Venda> implements VendaRepositorio {
         }
 
         if (obj.getData() != null) {
-            sql = this.filtrarPor(sql, "data", df.format(obj.getData()));
+            sql = this.filtrarPor(sql, "datavenda", df.format(obj.getData()));
         }
 
         if (obj.getCliente() != null) {
@@ -162,7 +162,7 @@ public class VendaDAO extends DAOGenerico<Venda> implements VendaRepositorio {
             if(id == 0){
             
                 try {
-                    String pegaid = "select max(id) from vendas where cliente = ? and data = ?";
+                    String pegaid = "select max(id) from venda where cliente = ? and datavenda = ?";
                     
                     PreparedStatement consultaid = BD.getConexao().prepareStatement(pegaid);
                     
@@ -183,7 +183,7 @@ public class VendaDAO extends DAOGenerico<Venda> implements VendaRepositorio {
             
             
             try {
-                String sql = "insert into itemvenda(venda_fk, item_fk, quantidade, valorunitario) values(?,?,?,?)";
+                String sql = "insert into itemvenda(venda_fk, itemfinanceiro_fk, quantidade, valorunitario) values(?,?,?,?)";
 
                 for (VendaItem i : obj.getItens()) {
 
