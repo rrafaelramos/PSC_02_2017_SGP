@@ -346,7 +346,8 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txt_rgActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    try {
+    
+        try {
         preencherParametros();
         salvar();
     } catch (ViolacaoRegraNegocioException ex) {
@@ -437,11 +438,17 @@ public class cadastroCliente extends javax.swing.JInternalFrame {
     }
 
     private void salvar() {
-        if (endereco.Salvar(e) && (clientes.Salvar(c))){
-            JOptionPane.showMessageDialog(rootPane, "Cliente cadastrado com sucesso!");
-        } else{
+        if(JOptionPane.showConfirmDialog(this, "Deseja realmente salvar os dados?","Confirmação",
+                JOptionPane.YES_NO_OPTION) == 0) {
+     
+            if (endereco.Salvar(e) && (clientes.Salvar(c))){
+                JOptionPane.showMessageDialog(rootPane, "Cliente cadastrado com sucesso!");
+            } else{
             
-            JOptionPane.showMessageDialog(rootPane, "NÃO FOI POSSIVEL FAZER O CADASTRO!");
+                JOptionPane.showMessageDialog(rootPane, "NÃO FOI POSSIVEL FAZER O CADASTRO!");
+            }
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Cadastro cancelado pelo usuário!");
         }
     }
 

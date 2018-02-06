@@ -41,10 +41,6 @@ public class Pessoa implements Entidade{
         this.endereco = endereco;
     }
 
-   /* public Pessoa() {
-        endereco = new Endereco();
-    }*/
-
     @Override
     public long getId() {
         return id;
@@ -72,7 +68,6 @@ public class Pessoa implements Entidade{
         return rg;
     }
     
-    // falta validar RG
     public void setRg(String rg) throws ViolacaoRegraNegocioException{
         if (rg == null || rg.isEmpty())
             throw new ViolacaoRegraNegocioException("Digite um RG");
@@ -93,7 +88,6 @@ public class Pessoa implements Entidade{
         return email;
     }
     
-    //falta validar email
     public void setEmail(String email) {
         this.email = email;
     }
@@ -118,7 +112,6 @@ public class Pessoa implements Entidade{
         return nascimento;
     }
 
-    // falta validar o nascimento
     public void setNascimento(Date nascimento) {
         this.nascimento = nascimento;
     }

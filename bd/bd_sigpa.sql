@@ -17,11 +17,18 @@ create table endereco (
 
 );
 
+<<<<<<< HEAD
 select * from fornecedores;
 select * from funcionarios;
 select * from clientes;
 select * from itemfinanceiro;
 -- drop table fornecedores;
+=======
+-- select * from endereco;
+-- select * from funcionarios;
+-- select * from clientes;
+-- select * from itemfinanceiro;
+>>>>>>> 07a942036146fd8686d9c02bb4ff20b2fdd20c75
 
 select * from funcionarios;
 create table funcionarios (
@@ -42,7 +49,6 @@ create table funcionarios (
     tipo varchar(20) not null,
     primary key (id),
     foreign key (endereco_fk) references endereco(id)
-
 );
 -- drop table clientes;
 
@@ -79,8 +85,11 @@ create table fornecedores (
 
 );
 
+<<<<<<< HEAD
 select * from fornecedores;
 
+=======
+>>>>>>> 07a942036146fd8686d9c02bb4ff20b2fdd20c75
 -- drop table itemfinanceiro;
 
 create table itemfinanceiro (
@@ -116,7 +125,11 @@ create table venda (
 	id int auto_increment not null,
     datavenda date not null,
     cliente_fk int not null,
+<<<<<<< HEAD
 	valorvenda float,
+=======
+    valorvenda float not null,
+>>>>>>> 07a942036146fd8686d9c02bb4ff20b2fdd20c75
     primary key (id),
     foreign key (cliente_fk) references clientes (id)
 );
@@ -129,15 +142,26 @@ create table contasapagar (
     primary key (id)
 );
 
+<<<<<<< HEAD
  -- drop table itemvenda;
 create table itemvenda(
 	id int auto_increment null,
+=======
+-- drop table itemvenda;
+create table itemvenda (
+	id int auto_increment,
+>>>>>>> 07a942036146fd8686d9c02bb4ff20b2fdd20c75
     venda_fk int not null,
     item_fk int not null,
     quantidade int not null,
     valorunitario float,
     primary key (id),
+	valorunitario float,
     foreign key (venda_fk) references venda (id),
+<<<<<<< HEAD
     foreign key (item_fk) references itemfinanceiro (id)
     
+=======
+    foreign key (itemfinanceiro_fk) references itemfinanceiro (id)
+>>>>>>> 07a942036146fd8686d9c02bb4ff20b2fdd20c75
 );
