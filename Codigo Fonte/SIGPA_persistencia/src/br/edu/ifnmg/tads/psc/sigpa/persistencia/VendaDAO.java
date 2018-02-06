@@ -6,7 +6,6 @@
 package br.edu.ifnmg.tads.psc.sigpa.persistencia;
 
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ClienteRepositorio;
-import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ItemFinanceiro;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.ItemFinanceiroRepositorio;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.RepositorioBuilder;
 import br.edu.ifnmg.tads.psc.sigpa.aplicacao.Venda;

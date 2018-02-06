@@ -122,7 +122,7 @@ public class Login extends javax.swing.JFrame {
             
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sigpa", "root", "123");
+                con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sigpa", "root", "");
                 Statement stm = con.createStatement();
                 String SQL = "Select * from funcionarios where username = '"+ txt_nome.getText()+"';";
                 String TipoUsuario = "Select tipo from funcionario where senha = '"+ txt_nome.getText()+"';";

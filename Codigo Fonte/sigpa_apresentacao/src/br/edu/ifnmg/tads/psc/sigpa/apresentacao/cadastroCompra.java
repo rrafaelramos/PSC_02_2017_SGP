@@ -272,14 +272,16 @@ public class cadastroCompra extends javax.swing.JInternalFrame {
     }
     
     private void salvar(){
-        
-        
-       
-        if(compra.Salvar(c)){
-            JOptionPane.showMessageDialog(rootPane, "Compra cadastrada com sucesso!");
-        } else{
-            
-            JOptionPane.showMessageDialog(rootPane, "NÃO FOI POSSIVEL FAZER O CADASTRO!");
+        if(JOptionPane.showConfirmDialog(this, "Deseja realmente salvar os dados?","Confirmação",
+                JOptionPane.YES_NO_OPTION) == 0) { 
+            if(compra.Salvar(c)){
+                 JOptionPane.showMessageDialog(rootPane, "Compra cadastrada com sucesso!");
+            } else{
+
+                 JOptionPane.showMessageDialog(rootPane, "NÃO FOI POSSIVEL FAZER O CADASTRO!");
+            }
+        }else{ 
+            JOptionPane.showMessageDialog(rootPane, "Cadastro cancelado pelo usuário!");
         }
     }
     

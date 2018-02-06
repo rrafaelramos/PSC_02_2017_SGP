@@ -8,6 +8,7 @@ package br.edu.ifnmg.tads.psc.sigpa.apresentacao;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -53,6 +54,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu9 = new javax.swing.JMenu();
+        btn_sair = new javax.swing.JMenu();
 
         jMenuItem11.setText("jMenuItem11");
 
@@ -62,7 +64,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuBar1.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/tads/psc/sigpa/apresentacao/network(1).png"))); // NOI18N
-        jMenu1.setText("Usuarios");
+        jMenu1.setText("Usuários");
         jMenu1.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
 
         jMAdm.setText("Administrador");
@@ -186,6 +188,16 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         jMenuBar1.add(jMenu9);
+
+        btn_sair.setIcon(new javax.swing.ImageIcon("C:\\Users\\Jéssica Ramos\\Downloads\\logout.png")); // NOI18N
+        btn_sair.setText("Sair");
+        btn_sair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btn_sair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_sairMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(btn_sair);
 
         setJMenuBar(jMenuBar1);
 
@@ -341,6 +353,15 @@ public class TelaInicial extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenu9MouseClicked
 
+    private void btn_sairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_sairMouseClicked
+        
+        if(JOptionPane.showConfirmDialog(this, "Deseja realmente sair?","Confirmação",
+                JOptionPane.YES_NO_OPTION) == 0) {
+            JOptionPane.showMessageDialog(this,"ATÉ UM OUTRO DIA!" );
+            System.exit(0);
+        }
+    }//GEN-LAST:event_btn_sairMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -378,6 +399,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane area;
+    private javax.swing.JMenu btn_sair;
     private javax.swing.JMenu jMAdm;
     private javax.swing.JMenu jMVendedor;
     private javax.swing.JMenu jMenu1;
