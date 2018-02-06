@@ -17,19 +17,21 @@ create table endereco (
 
 );
 
--- select * from endereco;
--- select * from funcionarios;
--- select * from clientes;
+select * from fornecedores;
+select * from funcionarios;
+select * from clientes;
 select * from itemfinanceiro;
+-- drop table fornecedores;
 
+select * from funcionarios;
 create table funcionarios (
 	id int auto_increment not null,
     nome varchar (50) not null,
-    cpf varchar (11) not null,
+    cpf varchar (11) not null unique,
     rg varchar (20) not null,
     nascimento date not null,
     sexo char not null,
-    email varchar (150) not null,
+    email varchar (150) not null unique,
     endereco_fk int,
     telefone varchar (11) not null,
     admissao date not null,
@@ -37,17 +39,19 @@ create table funcionarios (
     salario numeric (10,3),
     username varchar (20) not null,
     senha varchar (20) not null,
-    tipo int not null,
+    tipo varchar(20) not null,
     primary key (id),
     foreign key (endereco_fk) references endereco(id)
 
 );
+-- drop table clientes;
 
-
+-- drop table venda;
+ 
 create table clientes (
 	id int auto_increment not null,
     nome varchar(50) not null,
-    cpf varchar (11) not null,
+    cpf varchar (11) not null unique,
     rg varchar (20) not null,
     nascimento date not null,
     sexo char not null,
@@ -75,14 +79,16 @@ create table fornecedores (
 
 );
 
-drop table itemfinanceiro;
+select * from fornecedores;
+
+-- drop table itemfinanceiro;
 
 create table itemfinanceiro (
 	id int auto_increment not null,
     nome varchar (50) not null,
     precounitario long not null,
-    precocusto long not null,
-    estoque long not null,
+    precocusto float not null,
+    estoque float not null,
     descricao varchar(100),
     categoria varchar (20),
     fornecedor_fk int not null,
@@ -102,11 +108,15 @@ create table compra (
 
 );
 
+
+select * from compra;
+drop table venda;
+
 create table venda (
 	id int auto_increment not null,
     datavenda date not null,
     cliente_fk int not null,
-	valorvenda float not null,
+	valorvenda float,
     primary key (id),
     foreign key (cliente_fk) references clientes (id)
 );
@@ -119,14 +129,15 @@ create table contasapagar (
     primary key (id)
 );
 
- drop table itemvenda;
-create table itemvenda (
-	id int auto_increment,
+ -- drop table itemvenda;
+create table itemvenda(
+	id int auto_increment null,
     venda_fk int not null,
-    itemfinanceiro_fk int not null,
+    item_fk int not null,
     quantidade int not null,
+    valorunitario float,
     primary key (id),
     foreign key (venda_fk) references venda (id),
-    foreign key (itemfinanceiro_fk) references itemfinanceiro (id)
-
+    foreign key (item_fk) references itemfinanceiro (id)
+    
 );
