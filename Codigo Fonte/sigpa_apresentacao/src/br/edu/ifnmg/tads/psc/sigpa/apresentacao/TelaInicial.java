@@ -65,7 +65,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/tads/psc/sigpa/apresentacao/network(1).png"))); // NOI18N
         jMenu1.setText("Usuários");
-        jMenu1.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        jMenu1.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
 
         jMAdm.setText("Administrador");
 
@@ -176,12 +176,12 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/tads/psc/sigpa/apresentacao/checklist.png"))); // NOI18N
         jMenu2.setText("Relatórios");
-        jMenu2.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        jMenu2.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         jMenuBar1.add(jMenu2);
 
         jMenu9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/tads/psc/sigpa/apresentacao/money-bag.png"))); // NOI18N
         jMenu9.setText("Venda");
-        jMenu9.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        jMenu9.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         jMenu9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu9MouseClicked(evt);
@@ -189,9 +189,9 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu9);
 
-        btn_sair.setIcon(new javax.swing.ImageIcon("C:\\Users\\Jéssica Ramos\\Downloads\\logout.png")); // NOI18N
+        btn_sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/tads/psc/sigpa/apresentacao/exit(1).png"))); // NOI18N
         btn_sair.setText("Sair");
-        btn_sair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btn_sair.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         btn_sair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_sairMouseClicked(evt);

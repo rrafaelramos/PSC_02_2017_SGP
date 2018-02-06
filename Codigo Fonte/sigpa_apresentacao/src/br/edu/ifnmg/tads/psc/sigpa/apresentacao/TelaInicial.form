@@ -21,7 +21,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Usu&#xe1;rios"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Noto Sans" size="14" style="0"/>
+              <Font name="Noto Sans" size="14" style="1"/>
             </Property>
           </Properties>
           <SubComponents>
@@ -157,7 +157,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Relat&#xf3;rios"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Noto Sans" size="14" style="0"/>
+              <Font name="Noto Sans" size="14" style="1"/>
             </Property>
           </Properties>
         </Menu>
@@ -168,7 +168,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Venda"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Noto Sans" size="14" style="0"/>
+              <Font name="Noto Sans" size="14" style="1"/>
             </Property>
           </Properties>
           <Events>
@@ -178,11 +178,11 @@
         <Menu class="javax.swing.JMenu" name="btn_sair">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\J&#xe9;ssica Ramos\Downloads\logout.png"/>
+              <Image iconType="3" name="/br/edu/ifnmg/tads/psc/sigpa/apresentacao/exit(1).png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Sair"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="14" style="0"/>
+              <Font name="Noto Sans" size="14" style="1"/>
             </Property>
           </Properties>
           <Events>
